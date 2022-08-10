@@ -1,0 +1,450 @@
+openapi: 3.0.4
+info:
+  title: DeskSharing
+  description: This is a service to share workspaces
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: http://localhost/v1
+tags:
+  - name: demand
+    description: Заявка на бронирование рабочего места
+paths:
+  /demand/create:
+    post:
+      tags:
+        - demand
+      summary: Create demand
+      operationId: demandCreate
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DemandCreateRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DemandCreateResponse'
+  /demand/read:
+    post:
+      tags:
+        - demand
+      summary: Read demand
+      operationId: demandRead
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DemandReadRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DemandReadResponse'
+  /demand/update:
+    post:
+      tags:
+        - demand
+      summary: Update demand
+      operationId: demandUpdate
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DemandUpdateRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DemandUpdateResponse'
+  /demand/delete:
+    post:
+      tags:
+        - demand
+      summary: Delete demand
+      operationId: demandDelete
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DemandDeleteRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DemandDeleteResponse'
+  /demand/search:
+    post:
+      tags:
+        - demand
+      summary: Search demand
+      operationId: demandSearch
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DemandSearchRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DemandSearchResponse'
+
+components:
+  schemas:
+
+    IRequest:
+      type: object
+      description: Базовый интерфейс для всех запросов
+      properties:
+        requestType:
+          type: string
+          description: Поле-дескриминатор для вычисления типа запроса
+          example: create
+        requestId:
+          type: string
+          description: Идентификатор запроса для отладки
+      discriminator:
+        propertyName: requestType
+        mapping:
+          create: '#/components/schemas/DemandCreateRequest'
+          read:   '#/components/schemas/DemandReadRequest'
+          update: '#/components/schemas/DemandUpdateRequest'
+          delete: '#/components/schemas/DemandDeleteRequest'
+          search: '#/components/schemas/DemandSearchRequest'
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        group:
+          type: string
+        field:
+          type: string
+        message:
+          type: string
+
+    ResponseResult:
+      type: string
+      enum:
+        - success
+        - error
+
+    IResponse:
+      type: object
+      description: Базовый интерфейс для всех ответов
+      properties:
+        responseType:
+          type: string
+          description: Поле-дескриминатор для вычисления типа запроса
+          example: create
+        requestId:
+          type: string
+          description: Идентификатор запроса для отладки
+        result:
+          $ref: '#/components/schemas/ResponseResult'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+
+      discriminator:
+        propertyName: responseType
+        mapping:
+          create: '#/components/schemas/DemandCreateResponse'
+          read:   '#/components/schemas/DemandReadResponse'
+          update: '#/components/schemas/DemandUpdateResponse'
+          delete: '#/components/schemas/DemandDeleteResponse'
+          search: '#/components/schemas/DemandSearchResponse'
+
+
+    UserId:
+      type: string
+      description: Идентификатор пользователя
+    Id:
+      type: string
+      description: Идентификатор заявки
+    DemandLock:
+      type: string
+      description: Версия оптимистичной блокировки
+
+    BaseDemand:
+      type: object
+      description: Объект описывает свойства, одинаковые для create и update
+      properties:
+        date:
+          type: date
+          description: Дата подачи заявки
+        bookingDate:
+          type: date
+          description: Дата бронирования
+        employeeId:
+          type: string
+          description: Идентификатор сотрудника
+        branchId:
+          type: string
+          description: Идентификатор филиала
+        buildingId:
+          type: string
+          description: Идентификатор здания
+        status:
+          $ref: '#/components/schemas/DemandStatus'
+        equipment:
+          $ref: '#/components/schemas/Equipment'
+
+    DemandStatus:
+      type: string
+      description: 'Статус заявки'
+      enum:
+        - NEW
+        - ACCEPTED
+        - DECLINED
+        - DELETED
+
+    Equipment:
+      type: object
+      description: Оборудование рабочего места
+      properties:
+        id:
+          type: string
+          description: Идентификатор сотрудника
+        monitorsCount:
+          type: number
+          description: Идентификатор сотрудника
+        withPhone:
+          type: boolean
+          description: Идентификатор сотрудника
+        withScanner:
+          type: boolean
+          description: Идентификатор сотрудника
+        withPrinter:
+          type: boolean
+          description: Идентификатор сотрудника
+
+    DemandCreateObject:
+      allOf:
+        - $ref: '#/components/schemas/BaseDemand'
+
+    DemandCreateRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/DemandRequestDebug'
+        - type: object
+          properties:
+            demand:
+              $ref: '#/components/schemas/DemandCreateObject'
+
+    DemandReadObject:
+      allOf:
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/Id'
+
+    DemandReadRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/DemandRequestDebug'
+        - type: object
+          properties:
+            demand:
+              $ref: '#/components/schemas/DemandReadObject'
+
+    DemandUpdateObject:
+      allOf:
+        - $ref: '#/components/schemas/BaseDemand'
+        - type: object
+          properties:
+            number:
+              type: string
+              description: Номер заявки
+            workDeskId:
+              type: string
+              description: Идентификатор рабочего места
+            declineReason:
+              type: string
+              description: Причина отказа (если заявка отклонена)
+            id:
+              $ref: '#/components/schemas/Id'
+            lock:
+              $ref: '#/components/schemas/DemandLock'
+
+    DemandUpdateRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/DemandRequestDebug'
+        - type: object
+          properties:
+            demand:
+              $ref: '#/components/schemas/DemandUpdateObject'
+
+    DemandDeleteObject:
+      allOf:
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/Id'
+            lock:
+              $ref: '#/components/schemas/DemandLock'
+
+    DemandDeleteRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/DemandRequestDebug'
+        - type: object
+          properties:
+            demand:
+              $ref: '#/components/schemas/DemandDeleteObject'
+
+    DemandSearchFilter:
+      type: object
+      description: Набор фильтров для поиска
+      properties:
+        dateFrom:
+          type: date
+          description: Дата начала диапазона бронирования
+        dateTo:
+          type: date
+          description: Дата окончания диапазона бронирования
+
+    DemandSearchRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/DemandRequestDebug'
+        - type: object
+          properties:
+            adFilter:
+              $ref: '#/components/schemas/DemandSearchFilter'
+
+    DemandResponseObject:
+      allOf:
+        - $ref: '#/components/schemas/BaseDemand'
+        - type: object
+          description: Объект, который возвращается в ответе бэкенда
+          properties:
+            number:
+              type: string
+              description: Номер заявки
+            workDeskId:
+              type: string
+              description: Идентификатор рабочего места
+            declineReason:
+              type: string
+              description: Причина отказа (если заявка отклонена)
+            id:
+              $ref: '#/components/schemas/Id'
+            employeeId:
+              $ref: '#/components/schemas/UserId'
+            lock:
+              $ref: '#/components/schemas/DemandLock'
+            permissions:
+              type: array
+              uniqueItems: true
+              items:
+                $ref: '#/components/schemas/DemandPermissions'
+
+    DemandPermissions:
+      type: string
+      description: Доступы для клиента для операций над заявкой
+      enum:
+        - read
+        - update
+        - delete
+
+    DemandResponseSingle:
+      allOf:
+        - type: object
+          description: Ответ с одним объектом заявки
+          properties:
+            demand:
+              $ref: '#/components/schemas/DemandResponseObject'
+
+    DemandResponseMulti:
+      allOf:
+        - type: object
+          description: Список найденных объектов
+          properties:
+            demands:
+              type: array
+              items:
+                $ref: '#/components/schemas/DemandResponseObject'
+
+    DemandCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - $ref: '#/components/schemas/DemandResponseSingle'
+
+    DemandReadResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - $ref: '#/components/schemas/DemandResponseSingle'
+
+    DemandUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - $ref: '#/components/schemas/DemandResponseSingle'
+
+    DemandDeleteResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - $ref: '#/components/schemas/DemandResponseSingle'
+
+    DemandSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - $ref: '#/components/schemas/DemandResponseMulti'
+
+    # STUBS ======================
+    DemandRequestDebugMode:
+      type: string
+      enum:
+        - prod
+        - test
+        - stub
+
+    DemandRequestDebug:
+      type: object
+      properties:
+        debug:
+          $ref: '#/components/schemas/DemandDebug'
+
+    DemandDebug:
+      type: object
+      properties:
+        mode:
+          $ref: '#/components/schemas/DemandRequestDebugMode'
+        stub:
+          $ref: '#/components/schemas/DemandRequestDebugStubs'
+
+    DemandRequestDebugStubs:
+      type: string
+      description: Перечисления всех стабов
+      enum:
+        - success
+        - notFound
+        - badId
+        - cannotDelete
