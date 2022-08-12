@@ -2,17 +2,10 @@ plugins {
     kotlin("jvm") version "1.7.10"
 }
 
-group = "ru.otus.otuskotlin.deskSharing"
-version = "1.0-SNAPSHOT"
-
-repositories {
-    mavenCentral()
-}
+group = rootProject.group
+version = rootProject.version
 
 dependencies {
-    testImplementation(kotlin("test"))
-}
-
-tasks.getByName<Test>("test") {
-    useJUnitPlatform()
+    val datetimeVersion: String by project
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
 }

@@ -1,5 +1,5 @@
 package model
 
 enum class DemandStatus {
-    NEW, ACCEPTED, DECLINED, DELETED
+    NEW, ACCEPTED, DECLINED, DELETED, NONE
 }

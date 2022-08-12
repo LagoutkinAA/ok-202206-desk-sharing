@@ -185,7 +185,7 @@ components:
     UserId:
       type: string
       description: Идентификатор пользователя
-    Id:
+    DemandId:
       type: string
       description: Идентификатор заявки
     DemandLock:
@@ -213,8 +213,6 @@ components:
           description: Идентификатор здания
         status:
           $ref: '#/components/schemas/DemandStatus'
-        equipment:
-          $ref: '#/components/schemas/Equipment'
 
     DemandStatus:
       type: string
@@ -225,27 +223,7 @@ components:
         - DECLINED
         - DELETED
 
-    Equipment:
-      type: object
-      description: Оборудование рабочего места
-      properties:
-        id:
-          type: string
-          description: Идентификатор сотрудника
-        monitorsCount:
-          type: number
-          description: Идентификатор сотрудника
-        withPhone:
-          type: boolean
-          description: Идентификатор сотрудника
-        withScanner:
-          type: boolean
-          description: Идентификатор сотрудника
-        withPrinter:
-          type: boolean
-          description: Идентификатор сотрудника
-
-    DemandCreateObject:
+    DemandCreateObjectDto:
       allOf:
         - $ref: '#/components/schemas/BaseDemand'
 
@@ -256,14 +234,14 @@ components:
         - type: object
           properties:
             demand:
-              $ref: '#/components/schemas/DemandCreateObject'
+              $ref: '#/components/schemas/DemandCreateObjectDto'
 
-    DemandReadObject:
+    DemandReadObjectDto:
       allOf:
         - type: object
           properties:
             id:
-              $ref: '#/components/schemas/Id'
+              $ref: '#/components/schemas/DemandId'
 
     DemandReadRequest:
       allOf:
@@ -272,9 +250,9 @@ components:
         - type: object
           properties:
             demand:
-              $ref: '#/components/schemas/DemandReadObject'
+              $ref: '#/components/schemas/DemandReadObjectDto'
 
-    DemandUpdateObject:
+    DemandUpdateObjectDto:
       allOf:
         - $ref: '#/components/schemas/BaseDemand'
         - type: object
@@ -289,7 +267,7 @@ components:
               type: string
               description: Причина отказа (если заявка отклонена)
             id:
-              $ref: '#/components/schemas/Id'
+              $ref: '#/components/schemas/DemandId'
             lock:
               $ref: '#/components/schemas/DemandLock'
 
@@ -300,14 +278,14 @@ components:
         - type: object
           properties:
             demand:
-              $ref: '#/components/schemas/DemandUpdateObject'
+              $ref: '#/components/schemas/DemandUpdateObjectDto'
 
-    DemandDeleteObject:
+    DemandDeleteObjectDto:
       allOf:
         - type: object
           properties:
             id:
-              $ref: '#/components/schemas/Id'
+              $ref: '#/components/schemas/DemandId'
             lock:
               $ref: '#/components/schemas/DemandLock'
 
@@ -318,18 +296,23 @@ components:
         - type: object
           properties:
             demand:
-              $ref: '#/components/schemas/DemandDeleteObject'
+              $ref: '#/components/schemas/DemandDeleteObjectDto'
 
     DemandSearchFilter:
       type: object
       description: Набор фильтров для поиска
       properties:
         dateFrom:
-          type: date
+          type: string
+          format: date
           description: Дата начала диапазона бронирования
         dateTo:
-          type: date
+          type: string
+          format: date
           description: Дата окончания диапазона бронирования
+        employeeId:
+          type: string
+          description: Идентификатор сотрудника
 
     DemandSearchRequest:
       allOf:
@@ -340,7 +323,7 @@ components:
             adFilter:
               $ref: '#/components/schemas/DemandSearchFilter'
 
-    DemandResponseObject:
+    DemandResponseObjectDto:
       allOf:
         - $ref: '#/components/schemas/BaseDemand'
         - type: object
@@ -355,9 +338,9 @@ components:
             declineReason:
               type: string
               description: Причина отказа (если заявка отклонена)
-            id:
-              $ref: '#/components/schemas/Id'
-            employeeId:
+            DemandId:
+              $ref: '#/components/schemas/DemandId'
+            UserId:
               $ref: '#/components/schemas/UserId'
             lock:
               $ref: '#/components/schemas/DemandLock'
@@ -381,7 +364,7 @@ components:
           description: Ответ с одним объектом заявки
           properties:
             demand:
-              $ref: '#/components/schemas/DemandResponseObject'
+              $ref: '#/components/schemas/DemandResponseObjectDto'
 
     DemandResponseMulti:
       allOf:
@@ -391,7 +374,7 @@ components:
             demands:
               type: array
               items:
-                $ref: '#/components/schemas/DemandResponseObject'
+                $ref: '#/components/schemas/DemandResponseObjectDto'
 
     DemandCreateResponse:
       allOf:

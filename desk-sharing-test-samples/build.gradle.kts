@@ -2,8 +2,8 @@ plugins {
     kotlin("jvm") version "1.7.10"
 }
 
-group = "ru.otus.otuskotlin.deskSharing"
-version = "1.0-SNAPSHOT"
+group = rootProject.group
+version = rootProject.version
 
 repositories {
     mavenCentral()
