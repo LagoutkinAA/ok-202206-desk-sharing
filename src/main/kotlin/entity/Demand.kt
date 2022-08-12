@@ -11,7 +11,6 @@ data class Demand(
     var branch: Branch,
     var building: Building,
     var bookingDate: LocalDate,
-    var equipment: Equipment,
     var status: DemandStatus,
     var workDesk: WorkDesk?,
     var declineReason: String?

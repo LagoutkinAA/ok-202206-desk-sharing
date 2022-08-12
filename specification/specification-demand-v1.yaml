@@ -320,7 +320,7 @@ components:
         - $ref: '#/components/schemas/DemandRequestDebug'
         - type: object
           properties:
-            adFilter:
+            demandFilter:
               $ref: '#/components/schemas/DemandSearchFilter'
 
     DemandResponseObjectDto:

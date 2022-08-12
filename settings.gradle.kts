@@ -20,5 +20,4 @@ pluginManagement {
 include("desk-sharing-common")
 include("desk-sharing-transport-main-openapi")
 include("desk-sharing-test-samples")
-
-
+include("desk-sharing-mappers")
