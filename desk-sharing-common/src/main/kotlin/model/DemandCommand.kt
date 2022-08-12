@@ -6,6 +6,5 @@ enum class DemandCommand {
     READ,
     UPDATE,
     DELETE,
-    SEARCH,
-    OFFERS,
+    SEARCH
 }

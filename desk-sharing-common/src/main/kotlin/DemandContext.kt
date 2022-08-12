@@ -15,5 +15,5 @@ data class DemandContext(
     var demandRequest: Demand = Demand(),
     var demandFilterRequest: DemandFilter = DemandFilter(),
     var demandResponse: Demand = Demand(),
-    var demandsResponse: MutableList<Demand> = mutableListOf()
+    var demandResponses: MutableList<Demand> = mutableListOf()
 )
