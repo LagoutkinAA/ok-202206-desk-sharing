@@ -5,18 +5,18 @@ import kotlinx.datetime.LocalDate
 
 data class Demand (
 
-    val date: LocalDate = LocalDate.NONE,
-    val bookingDate: LocalDate = LocalDate.NONE,
-    val employeeId: DskShrngId = DskShrngId.NONE,
-    val branchId: DskShrngId = DskShrngId.NONE,
-    val buildingId: DskShrngId = DskShrngId.NONE,
-    val status: DemandStatus = DemandStatus.NONE,
-    val number: String = "",
-    val workDeskId: DskShrngId = DskShrngId.NONE,
-    val declineReason: String = "",
-    val demandId: DemandId = DemandId.NONE,
-    val userId: DemandUserId = DemandUserId.NONE,
-    val lock: String = "",
+    var date: LocalDate = LocalDate.NONE,
+    var bookingDate: LocalDate = LocalDate.NONE,
+    var employeeId: DskShrngId = DskShrngId.NONE,
+    var branchId: DskShrngId = DskShrngId.NONE,
+    var buildingId: DskShrngId = DskShrngId.NONE,
+    var status: DemandStatus = DemandStatus.NONE,
+    var number: String = "",
+    var workDeskId: DskShrngId = DskShrngId.NONE,
+    var declineReason: String = "",
+    var demandId: DskShrngId = DskShrngId.NONE,
+    var userId: DemandUserId = DemandUserId.NONE,
+    var lock: String = "",
     val permissions: MutableSet<DemandPermissionClient> = mutableSetOf()
 
 )
