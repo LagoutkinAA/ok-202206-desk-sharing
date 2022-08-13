@@ -12,8 +12,8 @@ data class DemandContext(
 
     var requestId: DemandRequestId = DemandRequestId.NONE,
     var timeStart: Instant = Instant.NONE,
-    var demandRequest: Demand = Demand(),
+    var demandRequest: DemandDto = DemandDto(),
     var demandFilterRequest: DemandFilter = DemandFilter(),
-    var demandResponse: Demand = Demand(),
-    var demandResponses: MutableList<Demand> = mutableListOf()
+    var demandResponse: DemandDto = DemandDto(),
+    var demandResponses: MutableList<DemandDto> = mutableListOf()
 )

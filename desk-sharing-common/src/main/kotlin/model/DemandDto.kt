@@ -3,7 +3,7 @@ package model
 import NONE
 import kotlinx.datetime.LocalDate
 
-data class Demand (
+data class DemandDto (
 
     var date: LocalDate = LocalDate.NONE,
     var bookingDate: LocalDate = LocalDate.NONE,

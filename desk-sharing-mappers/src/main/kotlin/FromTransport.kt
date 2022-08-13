@@ -16,7 +16,7 @@ fun DemandContext.fromTransport(request: IRequest) = when (request) {
 }
 
 private fun String?.toDskShrngId() = this?.let { DskShrngId(it) } ?: DskShrngId.NONE
-private fun String?.toDemandWithId() = Demand(demandId = this.toDskShrngId())
+private fun String?.toDemandWithId() = DemandDto(demandId = this.toDskShrngId())
 private fun IRequest?.requestId() = this?.requestId?.let { DemandRequestId(it) } ?: DemandRequestId.NONE
 
 private fun DemandStatus?.fromTransport(): model.DemandStatus = when (this) {
@@ -45,7 +45,7 @@ private fun DemandDebug?.transportToStubCase(): DemandStubs = when (this?.stub) 
 fun DemandContext.fromTransport(request: DemandCreateRequest) {
     command = DemandCommand.CREATE
     requestId = request.requestId()
-    demandRequest = request.demand?.toInternal() ?: Demand()
+    demandRequest = request.demand?.toInternal() ?: DemandDto()
     workMode = request.debug.transportToWorkMode()
     stubCase = request.debug.transportToStubCase()
 }
@@ -61,7 +61,7 @@ fun DemandContext.fromTransport(request: DemandReadRequest) {
 fun DemandContext.fromTransport(request: DemandUpdateRequest) {
     command = DemandCommand.UPDATE
     requestId = request.requestId()
-    demandRequest = request.demand?.toInternal() ?: Demand()
+    demandRequest = request.demand?.toInternal() ?: DemandDto()
     workMode = request.debug.transportToWorkMode()
     stubCase = request.debug.transportToStubCase()
 }
@@ -88,7 +88,7 @@ private fun DemandSearchFilter?.toInternal(): DemandFilter = DemandFilter(
     employeeId = this?.employeeId.toDskShrngId()
 )
 
-private fun DemandCreateObjectDto.toInternal(): Demand = Demand(
+private fun DemandCreateObjectDto.toInternal(): DemandDto = DemandDto(
     date = toLocalDate(this.date),
     bookingDate = toLocalDate(this.bookingDate),
     employeeId = this.employeeId.toDskShrngId(),
@@ -97,7 +97,7 @@ private fun DemandCreateObjectDto.toInternal(): Demand = Demand(
     status = status.fromTransport()
 )
 
-private fun DemandUpdateObjectDto.toInternal(): Demand = Demand(
+private fun DemandUpdateObjectDto.toInternal(): DemandDto = DemandDto(
     date = toLocalDate(this.date),
     bookingDate = toLocalDate(this.bookingDate),
     employeeId = this.employeeId.toDskShrngId(),

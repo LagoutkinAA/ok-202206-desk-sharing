@@ -48,12 +48,12 @@ fun DemandContext.toTransportSearch() = DemandSearchResponse(
     demands = demandResponses.toTransportDemand()
 )
 
-fun List<Demand>.toTransportDemand(): List<DemandResponseObjectDto>? = this
+fun List<DemandDto>.toTransportDemand(): List<DemandResponseObjectDto>? = this
     .map { it.toTransportDemand() }
     .toList()
     .takeIf { it.isNotEmpty() }
 
-private fun Demand.toTransportDemand(): DemandResponseObjectDto = DemandResponseObjectDto(
+private fun DemandDto.toTransportDemand(): DemandResponseObjectDto = DemandResponseObjectDto(
     date = date.takeIf { it != LocalDate.NONE }?.toString(),
     bookingDate = bookingDate.takeIf { it != LocalDate.NONE }?.toString(),
     employeeId = employeeId.takeIf { it != DskShrngId.NONE }?.asString(),
