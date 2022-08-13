@@ -197,10 +197,12 @@ components:
       description: Объект описывает свойства, одинаковые для create и update
       properties:
         date:
-          type: date
+          type: string
+          format: date
           description: Дата подачи заявки
         bookingDate:
-          type: date
+          type: string
+          format: date
           description: Дата бронирования
         employeeId:
           type: string
