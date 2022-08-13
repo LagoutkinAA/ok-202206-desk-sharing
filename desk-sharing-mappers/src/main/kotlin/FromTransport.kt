@@ -53,7 +53,7 @@ fun DemandContext.fromTransport(request: DemandCreateRequest) {
 fun DemandContext.fromTransport(request: DemandReadRequest) {
     command = DemandCommand.READ
     requestId = request.requestId()
-    demandRequest = request.demand?.id.toDemandWithId()
+    demandRequest = request.demand?.demandId.toDemandWithId()
     workMode = request.debug.transportToWorkMode()
     stubCase = request.debug.transportToStubCase()
 }
@@ -69,7 +69,7 @@ fun DemandContext.fromTransport(request: DemandUpdateRequest) {
 fun DemandContext.fromTransport(request: DemandDeleteRequest) {
     command = DemandCommand.DELETE
     requestId = request.requestId()
-    demandRequest = request.demand?.id.toDemandWithId()
+    demandRequest = request.demand?.demandId.toDemandWithId()
     workMode = request.debug.transportToWorkMode()
     stubCase = request.debug.transportToStubCase()
 }
@@ -107,7 +107,7 @@ private fun DemandUpdateObjectDto.toInternal(): DemandDto = DemandDto(
     number = this.number ?: "",
     workDeskId = this.workDeskId.toDskShrngId(),
     declineReason = this.declineReason ?: "",
-    demandId = this.id.toDskShrngId(),
+    demandId = this.demandId.toDskShrngId(),
     lock = this.lock ?: ""
 )
 

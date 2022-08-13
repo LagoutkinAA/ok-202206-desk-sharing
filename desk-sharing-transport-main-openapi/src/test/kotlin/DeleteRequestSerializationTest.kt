@@ -5,13 +5,13 @@ import kotlin.test.assertEquals
 
 class DeleteRequestSerializationTest {
     private val request = DemandDeleteRequest(
-       requestId = "2e07327d-47e7-4da1-9c89-eff53a37cdb7",
+        requestId = "2e07327d-47e7-4da1-9c89-eff53a37cdb7",
         debug = DemandDebug(
             mode = DemandRequestDebugMode.STUB,
             stub = DemandRequestDebugStubs.CANNOT_DELETE
         ),
         demand = DemandDeleteObjectDto(
-            id = "2e07327d-47e7-4da1-9c89-eff53a37c000",
+            demandId = "2e07327d-47e7-4da1-9c89-eff53a37c000",
             lock = "123"
         )
     )
@@ -20,7 +20,7 @@ class DeleteRequestSerializationTest {
     fun serialize() {
         val json = apiV1Mapper.writeValueAsString(request)
 
-        assertContains(json, Regex("\"id\":\\s*\"2e07327d-47e7-4da1-9c89-eff53a37c000\""))
+        assertContains(json, Regex("\"demandId\":\\s*\"2e07327d-47e7-4da1-9c89-eff53a37c000\""))
         assertContains(json, Regex("\"lock\":\\s*\"123\""))
         assertContains(json, Regex("\"mode\":\\s*\"stub\""))
         assertContains(json, Regex("\"stub\":\\s*\"cannotDelete\""))

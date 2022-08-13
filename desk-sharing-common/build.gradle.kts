@@ -1,9 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.7.10"
+    kotlin("jvm")
 }
-
-group = rootProject.group
-version = rootProject.version
 
 dependencies {
     val datetimeVersion: String by project

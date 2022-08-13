@@ -242,7 +242,7 @@ components:
       allOf:
         - type: object
           properties:
-            id:
+            demandId:
               $ref: '#/components/schemas/DemandId'
 
     DemandReadRequest:
@@ -268,7 +268,7 @@ components:
             declineReason:
               type: string
               description: Причина отказа (если заявка отклонена)
-            id:
+            demandId:
               $ref: '#/components/schemas/DemandId'
             lock:
               $ref: '#/components/schemas/DemandLock'
@@ -286,7 +286,7 @@ components:
       allOf:
         - type: object
           properties:
-            id:
+            demandId:
               $ref: '#/components/schemas/DemandId'
             lock:
               $ref: '#/components/schemas/DemandLock'
@@ -340,9 +340,9 @@ components:
             declineReason:
               type: string
               description: Причина отказа (если заявка отклонена)
-            DemandId:
+            demandId:
               $ref: '#/components/schemas/DemandId'
-            UserId:
+            userId:
               $ref: '#/components/schemas/UserId'
             lock:
               $ref: '#/components/schemas/DemandLock'

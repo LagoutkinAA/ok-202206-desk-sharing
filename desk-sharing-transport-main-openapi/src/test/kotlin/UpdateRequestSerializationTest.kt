@@ -5,7 +5,7 @@ import kotlin.test.assertEquals
 
 class UpdateRequestSerializationTest {
     private val request = DemandUpdateRequest(
-       requestId = "2e07327d-47e7-4da1-9c89-eff53a37cdb7",
+        requestId = "2e07327d-47e7-4da1-9c89-eff53a37cdb7",
         debug = DemandDebug(
             mode = DemandRequestDebugMode.STUB,
             stub = DemandRequestDebugStubs.SUCCESS
@@ -17,7 +17,9 @@ class UpdateRequestSerializationTest {
             branchId = "2e07327d-47e7-4da1-9c89-eff53a37c111",
             buildingId = "2e07327d-47e7-4da1-9c89-eff53a37c222",
             status = DemandStatus.DECLINED,
-            declineReason = "No free work desk available"
+            declineReason = "No free work desk available",
+            demandId = "2e07327d-47e7-4da1-9c89-eff53a37cfff",
+            number = "01/001"
         )
     )
 
@@ -36,6 +38,8 @@ class UpdateRequestSerializationTest {
         assertContains(json, Regex("\"stub\":\\s*\"success\""))
         assertContains(json, Regex("\"requestType\":\\s*\"update\""))
         assertContains(json, Regex("\"requestId\":\\s*\"2e07327d-47e7-4da1-9c89-eff53a37cdb7\""))
+        assertContains(json, Regex("\"demandId\":\\s*\"2e07327d-47e7-4da1-9c89-eff53a37cfff\""))
+        assertContains(json, Regex("\"number\":\\s*\"01/001\""))
     }
 
     @Test
