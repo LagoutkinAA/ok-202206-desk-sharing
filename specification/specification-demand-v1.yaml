@@ -224,6 +224,7 @@ components:
         - ACCEPTED
         - DECLINED
         - DELETED
+        - ERROR
 
     DemandCreateObjectDto:
       allOf:

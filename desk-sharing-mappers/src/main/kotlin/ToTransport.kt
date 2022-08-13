@@ -97,5 +97,6 @@ private fun model.DemandStatus.toTransport(): DemandStatus? = when (this) {
     model.DemandStatus.DECLINED -> DemandStatus.DECLINED
     model.DemandStatus.DELETED -> DemandStatus.DELETED
     model.DemandStatus.ACCEPTED -> DemandStatus.ACCEPTED
+    model.DemandStatus.ERROR -> DemandStatus.ERROR
     model.DemandStatus.NONE -> null
 }
