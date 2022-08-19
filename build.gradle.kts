@@ -17,7 +17,9 @@ allprojects {
 
 
 dependencies {
+    val datetimeVersion: String by project
     testImplementation(kotlin("test"))
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
 }
 
 tasks.test {
