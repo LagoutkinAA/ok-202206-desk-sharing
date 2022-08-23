@@ -44,12 +44,10 @@ class MapperDeleteTest {
             demandResponse = DemandDto(
                 date = LocalDate(2022, 1, 1),
                 bookingDate = LocalDate(2022, 1, 10),
-                branchId = DskShrngId("2e07327d-47e7-4da1-9c89-eff53a37c111"),
-                buildingId = DskShrngId("2e07327d-47e7-4da1-9c89-eff53a37c222"),
                 employeeId = DskShrngId("2e07327d-47e7-4da1-9c89-eff53a37c000"),
                 status = model.DemandStatus.DELETED,
                 demandId = DskShrngId("2e07327d-47e7-4da1-9c89-eff53a37cfff"),
-                workDeskId = DskShrngId("2e07327d-47e7-4da1-9c89-eff53a37caaa"),
+                workDeskNumber = WorkDeskNumber("1/1"),
                 number = "01/001"
             )
         )
@@ -61,11 +59,9 @@ class MapperDeleteTest {
         assertEquals("2022-01-01", response.demand?.date)
         assertEquals("2022-01-10", response.demand?.bookingDate)
         assertEquals("2e07327d-47e7-4da1-9c89-eff53a37c000", response.demand?.employeeId)
-        assertEquals("2e07327d-47e7-4da1-9c89-eff53a37c111", response.demand?.branchId)
-        assertEquals("2e07327d-47e7-4da1-9c89-eff53a37c222", response.demand?.buildingId)
         assertEquals(DemandStatus.DELETED, response.demand?.status)
         assertEquals("2e07327d-47e7-4da1-9c89-eff53a37cfff", response.demand?.demandId)
-        assertEquals("2e07327d-47e7-4da1-9c89-eff53a37caaa", response.demand?.workDeskId)
+        assertEquals("1/1", response.demand?.workDeskNumber)
         assertEquals("01/001", response.demand?.number)
         assertNull(response.demand?.declineReason)
         assertNull(response.demand?.userId)

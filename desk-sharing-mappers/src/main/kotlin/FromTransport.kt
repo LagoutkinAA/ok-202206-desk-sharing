@@ -16,6 +16,7 @@ fun DemandContext.fromTransport(request: IRequest) = when (request) {
 }
 
 private fun String?.toDskShrngId() = this?.let { DskShrngId(it) } ?: DskShrngId.NONE
+private fun String?.toWorkDeskNumber() = this?.let { WorkDeskNumber(it) } ?: WorkDeskNumber.NONE
 private fun String?.toDemandWithId() = DemandDto(demandId = this.toDskShrngId())
 private fun IRequest?.requestId() = this?.requestId?.let { DemandRequestId(it) } ?: DemandRequestId.NONE
 
@@ -25,6 +26,7 @@ private fun DemandStatus?.fromTransport(): model.DemandStatus = when (this) {
     DemandStatus.DELETED -> model.DemandStatus.DELETED
     DemandStatus.ACCEPTED -> model.DemandStatus.ACCEPTED
     DemandStatus.ERROR -> model.DemandStatus.ERROR
+    DemandStatus.CONFIRMED -> model.DemandStatus.CONFIRMED
     null -> model.DemandStatus.NONE
 }
 
@@ -93,8 +95,6 @@ private fun DemandCreateObjectDto.toInternal(): DemandDto = DemandDto(
     date = toLocalDate(this.date),
     bookingDate = toLocalDate(this.bookingDate),
     employeeId = this.employeeId.toDskShrngId(),
-    branchId = this.branchId.toDskShrngId(),
-    buildingId = this.buildingId.toDskShrngId(),
     status = status.fromTransport()
 )
 
@@ -102,11 +102,9 @@ private fun DemandUpdateObjectDto.toInternal(): DemandDto = DemandDto(
     date = toLocalDate(this.date),
     bookingDate = toLocalDate(this.bookingDate),
     employeeId = this.employeeId.toDskShrngId(),
-    branchId = this.branchId.toDskShrngId(),
-    buildingId = this.buildingId.toDskShrngId(),
     status = status.fromTransport(),
     number = this.number ?: "",
-    workDeskId = this.workDeskId.toDskShrngId(),
+    workDeskNumber = this.workDeskNumber.toWorkDeskNumber(),
     declineReason = this.declineReason ?: "",
     demandId = this.demandId.toDskShrngId(),
     lock = this.lock ?: ""

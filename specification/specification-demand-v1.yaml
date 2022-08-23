@@ -12,11 +12,11 @@ tags:
   - name: demand
     description: Заявка на бронирование рабочего места
 paths:
-  /demand/create:
+  /demand/book:
     post:
       tags:
         - demand
-      summary: Create demand
+      summary: Create demand (book workspace)
       operationId: demandCreate
       requestBody:
         description: Request body
@@ -72,11 +72,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DemandUpdateResponse'
-  /demand/delete:
+  /demand/unbook:
     post:
       tags:
         - demand
-      summary: Delete demand
+      summary: Delete demand (unbook workspace)
       operationId: demandDelete
       requestBody:
         description: Request body
@@ -207,12 +207,6 @@ components:
         employeeId:
           type: string
           description: Идентификатор сотрудника
-        branchId:
-          type: string
-          description: Идентификатор филиала
-        buildingId:
-          type: string
-          description: Идентификатор здания
         status:
           $ref: '#/components/schemas/DemandStatus'
 
@@ -225,6 +219,7 @@ components:
         - DECLINED
         - DELETED
         - ERROR
+        - CONFIRMED
 
     DemandCreateObjectDto:
       allOf:
@@ -263,9 +258,9 @@ components:
             number:
               type: string
               description: Номер заявки
-            workDeskId:
+            workDeskNumber:
               type: string
-              description: Идентификатор рабочего места
+              description: Номер рабочего места
             declineReason:
               type: string
               description: Причина отказа (если заявка отклонена)
@@ -335,9 +330,9 @@ components:
             number:
               type: string
               description: Номер заявки
-            workDeskId:
+            workDeskNumber:
               type: string
-              description: Идентификатор рабочего места
+              description: Номер рабочего места
             declineReason:
               type: string
               description: Причина отказа (если заявка отклонена)

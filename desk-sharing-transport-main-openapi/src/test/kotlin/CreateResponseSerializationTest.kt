@@ -11,8 +11,6 @@ class CreateResponseSerializationTest {
             date = "2022-01-01",
             bookingDate = "2022-01-10",
             employeeId = "2e07327d-47e7-4da1-9c89-eff53a37c000",
-            branchId = "2e07327d-47e7-4da1-9c89-eff53a37c111",
-            buildingId = "2e07327d-47e7-4da1-9c89-eff53a37c222",
             status = DemandStatus.NEW,
             demandId = "2e07327d-47e7-4da1-9c89-eff53a37cfff",
             number = "01/001"
@@ -24,8 +22,6 @@ class CreateResponseSerializationTest {
         val json = apiV1Mapper.writeValueAsString(request)
 
         assertContains(json, Regex("\"employeeId\":\\s*\"2e07327d-47e7-4da1-9c89-eff53a37c000\""))
-        assertContains(json, Regex("\"branchId\":\\s*\"2e07327d-47e7-4da1-9c89-eff53a37c111\""))
-        assertContains(json, Regex("\"buildingId\":\\s*\"2e07327d-47e7-4da1-9c89-eff53a37c222\""))
         assertContains(json, Regex("\"date\":\\s*\"2022-01-01\""))
         assertContains(json, Regex("\"bookingDate\":\\s*\"2022-01-10\""))
         assertContains(json, Regex("\"status\":\\s*\"NEW\""))
