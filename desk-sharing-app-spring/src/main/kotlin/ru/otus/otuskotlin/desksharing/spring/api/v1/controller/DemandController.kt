@@ -15,7 +15,7 @@ import toTransportUpdate
 @RequestMapping("v1/demand")
 class DemandController {
 
-    @PostMapping("create")
+    @PostMapping("book")
     fun createDemand(@RequestBody request: DemandCreateRequest): DemandCreateResponse {
         val context = DemandContext()
         context.fromTransport(request)
@@ -39,7 +39,7 @@ class DemandController {
         return context.toTransportUpdate()
     }
 
-    @PostMapping("delete")
+    @PostMapping("unbook")
     fun deleteDemand(@RequestBody request: DemandDeleteRequest): DemandDeleteResponse {
         val context = DemandContext()
         context.fromTransport(request)
