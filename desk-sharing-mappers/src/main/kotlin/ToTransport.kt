@@ -57,11 +57,9 @@ private fun DemandDto.toTransportDemand(): DemandResponseObjectDto = DemandRespo
     date = date.takeIf { it != LocalDate.NONE }?.toString(),
     bookingDate = bookingDate.takeIf { it != LocalDate.NONE }?.toString(),
     employeeId = employeeId.takeIf { it != DskShrngId.NONE }?.asString(),
-    branchId = branchId.takeIf { it != DskShrngId.NONE }?.asString(),
-    buildingId = buildingId.takeIf { it != DskShrngId.NONE }?.asString(),
     status = status.toTransport(),
     number = number.takeIf { it.isNotBlank() },
-    workDeskId = workDeskId.takeIf { it != DskShrngId.NONE }?.asString(),
+    workDeskNumber = workDeskNumber.takeIf { it != WorkDeskNumber.NONE }?.asString(),
     declineReason = declineReason.takeIf { it.isNotBlank() },
     demandId = demandId.takeIf { it != DskShrngId.NONE }?.asString(),
     userId = userId.takeIf { it != DemandUserId.NONE }?.asString(),
@@ -98,5 +96,6 @@ private fun model.DemandStatus.toTransport(): DemandStatus? = when (this) {
     model.DemandStatus.DELETED -> DemandStatus.DELETED
     model.DemandStatus.ACCEPTED -> DemandStatus.ACCEPTED
     model.DemandStatus.ERROR -> DemandStatus.ERROR
+    model.DemandStatus.CONFIRMED -> DemandStatus.CONFIRMED
     model.DemandStatus.NONE -> null
 }

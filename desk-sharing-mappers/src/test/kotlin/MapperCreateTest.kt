@@ -21,8 +21,6 @@ class MapperCreateTest {
                 date = "2022-01-01",
                 bookingDate = "2022-01-10",
                 employeeId = "2e07327d-47e7-4da1-9c89-eff53a37c000",
-                branchId = "2e07327d-47e7-4da1-9c89-eff53a37c111",
-                buildingId = "2e07327d-47e7-4da1-9c89-eff53a37c222",
                 status = DemandStatus.NEW
             )
         )
@@ -39,11 +37,9 @@ class MapperCreateTest {
         assertEquals(LocalDate(2022, 1, 1), context.demandRequest.date)
         assertEquals(LocalDate(2022, 1, 10), context.demandRequest.bookingDate)
         assertEquals("2e07327d-47e7-4da1-9c89-eff53a37c000", context.demandRequest.employeeId.asString())
-        assertEquals("2e07327d-47e7-4da1-9c89-eff53a37c111", context.demandRequest.branchId.asString())
-        assertEquals("2e07327d-47e7-4da1-9c89-eff53a37c222", context.demandRequest.buildingId.asString())
         assertEquals(model.DemandStatus.NEW, context.demandRequest.status)
         assertEquals("", context.demandRequest.number)
-        assertEquals(DskShrngId.NONE, context.demandRequest.workDeskId)
+        assertEquals(WorkDeskNumber.NONE, context.demandRequest.workDeskNumber)
         assertEquals("", context.demandRequest.declineReason)
         assertEquals(DemandUserId.NONE, context.demandRequest.userId)
     }
@@ -59,8 +55,6 @@ class MapperCreateTest {
             demandResponse = DemandDto(
                 date = LocalDate(2022, 1, 1),
                 bookingDate = LocalDate(2022, 1, 10),
-                branchId = DskShrngId("2e07327d-47e7-4da1-9c89-eff53a37c111"),
-                buildingId = DskShrngId("2e07327d-47e7-4da1-9c89-eff53a37c222"),
                 employeeId = DskShrngId("2e07327d-47e7-4da1-9c89-eff53a37c000"),
                 status = model.DemandStatus.ERROR,
                 demandId = DskShrngId("2e07327d-47e7-4da1-9c89-eff53a37cfff")
@@ -82,11 +76,9 @@ class MapperCreateTest {
         assertEquals("2022-01-01", response.demand?.date)
         assertEquals("2022-01-10", response.demand?.bookingDate)
         assertEquals("2e07327d-47e7-4da1-9c89-eff53a37c000", response.demand?.employeeId)
-        assertEquals("2e07327d-47e7-4da1-9c89-eff53a37c111", response.demand?.branchId)
-        assertEquals("2e07327d-47e7-4da1-9c89-eff53a37c222", response.demand?.buildingId)
         assertEquals(DemandStatus.ERROR, response.demand?.status)
         assertEquals("2e07327d-47e7-4da1-9c89-eff53a37cfff", response.demand?.demandId)
-        assertNull(response.demand?.workDeskId)
+        assertNull(response.demand?.workDeskNumber)
         assertNull(response.demand?.number)
         assertNull(response.demand?.declineReason)
         assertNull(response.demand?.userId)

@@ -49,12 +49,10 @@ class MapperSearchTest {
                 DemandDto(
                     date = LocalDate(2022, 1, 1),
                     bookingDate = LocalDate(2022, 1, 10),
-                    branchId = DskShrngId("2e07327d-47e7-4da1-9c89-eff53a37c111"),
-                    buildingId = DskShrngId("2e07327d-47e7-4da1-9c89-eff53a37c222"),
                     employeeId = DskShrngId("2e07327d-47e7-4da1-9c89-eff53a37c000"),
                     status = model.DemandStatus.ACCEPTED,
                     demandId = DskShrngId("2e07327d-47e7-4da1-9c89-eff53a37cfff"),
-                    workDeskId = DskShrngId("2e07327d-47e7-4da1-9c89-eff53a37caaa"),
+                    workDeskNumber = WorkDeskNumber("1/1"),
                     number = "01/001"
                 )
             )
@@ -67,11 +65,9 @@ class MapperSearchTest {
         assertEquals("2022-01-01", response.demands?.firstOrNull()?.date)
         assertEquals("2022-01-10", response.demands?.firstOrNull()?.bookingDate)
         assertEquals("2e07327d-47e7-4da1-9c89-eff53a37c000", response.demands?.firstOrNull()?.employeeId)
-        assertEquals("2e07327d-47e7-4da1-9c89-eff53a37c111", response.demands?.firstOrNull()?.branchId)
-        assertEquals("2e07327d-47e7-4da1-9c89-eff53a37c222", response.demands?.firstOrNull()?.buildingId)
         assertEquals(DemandStatus.ACCEPTED, response.demands?.firstOrNull()?.status)
         assertEquals("2e07327d-47e7-4da1-9c89-eff53a37cfff", response.demands?.firstOrNull()?.demandId)
-        assertEquals("2e07327d-47e7-4da1-9c89-eff53a37caaa", response.demands?.firstOrNull()?.workDeskId)
+        assertEquals("1/1", response.demands?.firstOrNull()?.workDeskNumber)
         assertEquals("01/001", response.demands?.firstOrNull()?.number)
         assertNull(response.demands?.firstOrNull()?.declineReason)
         assertNull(response.demands?.firstOrNull()?.userId)
