@@ -9,3 +9,4 @@
 *.log
 gradlew.bat
 gradlew
+**/resources/1.json
