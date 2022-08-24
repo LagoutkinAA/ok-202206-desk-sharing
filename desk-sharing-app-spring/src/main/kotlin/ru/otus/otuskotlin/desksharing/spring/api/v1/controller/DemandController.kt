@@ -1,7 +1,10 @@
 package ru.otus.otuskotlin.desksharing.spring.api.v1.controller
 
 import fromTransport
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 import ru.otus.otuskotlin.deskSharing.api.v1.models.*
 import ru.otus.otuskotlin.desksharing.common.DemandContext
 import ru.otus.otuskotlin.desksharing.stub.DeskSharingDemandStub
@@ -31,7 +34,7 @@ class DemandController {
         return context.toTransportRead()
     }
 
-    @RequestMapping("update", method = [RequestMethod.POST])
+    @PostMapping("update")
     fun updateDemand(@RequestBody request: DemandUpdateRequest): DemandUpdateResponse {
         val context = DemandContext()
         context.fromTransport(request)
