@@ -1,9 +1,9 @@
 package ru.otus.otuskotlin.desksharing.spring.api.v1.controller
 
-import DemandContext
 import fromTransport
 import org.springframework.web.bind.annotation.*
 import ru.otus.otuskotlin.deskSharing.api.v1.models.*
+import ru.otus.otuskotlin.desksharing.common.DemandContext
 import ru.otus.otuskotlin.desksharing.stub.DeskSharingDemandStub
 import toTransportCreate
 import toTransportDelete

@@ -1,7 +1,7 @@
 package ru.otus.otuskotlin.desksharing.stub
 
 import kotlinx.datetime.LocalDate
-import model.*
+import ru.otus.otuskotlin.desksharing.common.model.*
 
 object DeskSharingDemand {
     val DEMAND: DemandDto
