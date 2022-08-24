@@ -43,6 +43,7 @@ class DemandController {
     fun deleteDemand(@RequestBody request: DemandDeleteRequest): DemandDeleteResponse {
         val context = DemandContext()
         context.fromTransport(request)
+        context.demandResponse = DeskSharingDemandStub.get()
         return context.toTransportDelete()
     }
 
