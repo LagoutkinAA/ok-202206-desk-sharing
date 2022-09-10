@@ -4,12 +4,17 @@ plugins {
     kotlin("jvm") version "1.7.10"
 }
 
-group = "org.example"
+group = "ru.otus.otuskotlin.deskSharing"
 version = "1.0-SNAPSHOT"
 
-repositories {
-    mavenCentral()
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = uri("https://jitpack.io") }
+    }
 }
+
 
 dependencies {
     testImplementation(kotlin("test"))
@@ -20,5 +25,10 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
+}
+
+subprojects {
+    group = rootProject.group
+    version = rootProject.version
 }

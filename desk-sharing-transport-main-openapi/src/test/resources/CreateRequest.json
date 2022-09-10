@@ -1,0 +1,17 @@
+{
+  "requestType": "create",
+  "requestType": null,
+  "requestId": "2e07327d-47e7-4da1-9c89-eff53a37cdb7",
+  "debug": {
+    "mode": "stub",
+    "stub": "success"
+  },
+  "demand": {
+    "date": "2022-01-01",
+    "bookingDate": "2022-01-10",
+    "employeeId": "2e07327d-47e7-4da1-9c89-eff53a37c000",
+    "branchId": "2e07327d-47e7-4da1-9c89-eff53a37c111",
+    "buildingId": "2e07327d-47e7-4da1-9c89-eff53a37c222",
+    "status": null
+  }
+}
