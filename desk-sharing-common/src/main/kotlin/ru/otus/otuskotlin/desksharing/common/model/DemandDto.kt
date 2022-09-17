@@ -17,5 +17,9 @@ data class DemandDto (
     var lock: String = "",
     val permissions: MutableSet<DemandPermissionClient> = mutableSetOf()
 
-)
+){
+    fun deepCopy(): DemandDto = copy(
+        permissions = permissions.toMutableSet()
+    )
+}
 

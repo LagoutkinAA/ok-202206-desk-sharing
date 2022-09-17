@@ -51,3 +51,25 @@ fun ICorChainDsl<DemandContext>.validateUserIdProperFormat(title: String) = work
         )
     }
 }
+
+fun ICorChainDsl<DemandContext>.validateDemandIdProperFormat(title: String) = worker {
+    this.title = title
+
+    val regExp = Regex("^[0-9a-zA-Z-]+$")
+    on {
+        demandRequestValidating.demandId != DskShrngId.NONE && !demandRequestValidating.demandId.asString()
+            .matches(regExp)
+    }
+    handle {
+        val encodedId = demandRequestValidating.demandId.asString()
+            .replace("<", "&lt;")
+            .replace(">", "&gt;")
+        fail(
+            errorValidation(
+                field = "demandId",
+                violationCode = "badFormat",
+                description = "value $encodedId must contain only"
+            )
+        )
+    }
+}
