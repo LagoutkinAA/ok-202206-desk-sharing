@@ -9,15 +9,20 @@ plugins {
 dependencies {
     val kotestVersion: String by project
     val springdocOpenapiUiVersion: String by project
-
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-websocket")
-    implementation("org.springdoc:springdoc-openapi-ui:$springdocOpenapiUiVersion")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     val datetimeVersion: String by project
+    val coroutinesVersion: String by project
+
+    implementation("org.springframework.boot:spring-boot-starter-actuator") // info; refresh; springMvc output
+    implementation("org.springframework.boot:spring-boot-starter-webflux") // Controller, Service, etc..
+    implementation("org.springframework.boot:spring-boot-starter-websocket") // Controller, Service, etc..
+    implementation("org.springdoc:springdoc-openapi-ui:$springdocOpenapiUiVersion")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin") // from models to json and Vice versa
+    implementation("org.jetbrains.kotlin:kotlin-reflect") // for spring-boot app
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8") // for spring-boot app
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutinesVersion}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:${coroutinesVersion}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:${coroutinesVersion}")
+    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
 
     // project modules
@@ -31,8 +36,8 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
-    testImplementation("org.springframework.boot:spring-boot-starter-webflux")
-    testImplementation("com.ninja-squad:springmockk:3.0.1")
+    testImplementation("com.ninja-squad:springmockk:3.1.1") // mockking beans
+    testImplementation("org.assertj:assertj-core:3.23.1")
 }
 
 tasks {
