@@ -10,7 +10,9 @@ import ru.otus.otuskotlin.desksharing.cor.worker
 
 fun ICorChainDsl<DemandContext>.validateEmployeeIdNotEmpty(title: String) = worker {
     this.title = title
-    on { demandRequestValidating.employeeId == DskShrngId.NONE }
+    on {
+        demandRequestValidating.employeeId == DskShrngId.NONE || demandRequestValidating.employeeId.asString().isEmpty()
+    }
     handle {
         fail(
             errorValidation(
@@ -24,7 +26,7 @@ fun ICorChainDsl<DemandContext>.validateEmployeeIdNotEmpty(title: String) = work
 
 fun ICorChainDsl<DemandContext>.validateUserIdNotEmpty(title: String) = worker {
     this.title = title
-    on { demandRequestValidating.userId == DemandUserId.NONE }
+    on { demandRequestValidating.userId == DemandUserId.NONE || demandRequestValidating.userId.asString().isEmpty() }
     handle {
         fail(
             errorValidation(
@@ -38,7 +40,7 @@ fun ICorChainDsl<DemandContext>.validateUserIdNotEmpty(title: String) = worker {
 
 fun ICorChainDsl<DemandContext>.validateDemandIdNotEmpty(title: String) = worker {
     this.title = title
-    on { demandRequestValidating.demandId == DskShrngId.NONE }
+    on { demandRequestValidating.demandId == DskShrngId.NONE || demandRequestValidating.demandId.asString().isEmpty() }
     handle {
         fail(
             errorValidation(
