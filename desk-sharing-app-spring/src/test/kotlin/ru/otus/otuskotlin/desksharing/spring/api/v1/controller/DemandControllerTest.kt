@@ -1,6 +1,7 @@
 package ru.otus.otuskotlin.desksharing.spring.api.v1.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.ninjasquad.springmockk.MockkBean
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
@@ -9,6 +10,7 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import ru.otus.otuskotlin.deskSharing.api.v1.models.*
+import ru.otus.otuskotlin.desksharing.biz.DemandProcessor
 import ru.otus.otuskotlin.desksharing.common.DemandContext
 import ru.otus.otuskotlin.desksharing.stub.DeskSharingDemandStub
 import toTransportCreate
@@ -25,6 +27,9 @@ internal class DemandControllerTest {
 
     @Autowired
     private lateinit var mapper: ObjectMapper
+
+    @MockkBean(relaxUnitFun = true)
+    private lateinit var processor: DemandProcessor
 
     @Test
     fun createDemand() {

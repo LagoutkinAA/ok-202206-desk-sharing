@@ -1,61 +1,37 @@
 package ru.otus.otuskotlin.desksharing.spring.api.v1.controller
 
-import fromTransport
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import ru.otus.otuskotlin.deskSharing.api.v1.models.*
-import ru.otus.otuskotlin.desksharing.common.DemandContext
-import ru.otus.otuskotlin.desksharing.stub.DeskSharingDemandStub
-import toTransportCreate
-import toTransportDelete
-import toTransportRead
-import toTransportSearch
-import toTransportUpdate
+import ru.otus.otuskotlin.desksharing.biz.DemandProcessor
+import ru.otus.otuskotlin.desksharing.common.model.DemandCommand
 
 @RestController
 @RequestMapping("v1/demand")
-class DemandController {
+class DemandController(
+    private val processor: DemandProcessor
+) {
 
     @PostMapping("book")
-    fun createDemand(@RequestBody request: DemandCreateRequest): DemandCreateResponse {
-        val context = DemandContext()
-        context.fromTransport(request)
-        context.demandResponse = DeskSharingDemandStub.get()
-        return context.toTransportCreate()
-    }
+    suspend fun createDemand(@RequestBody request: DemandCreateRequest): DemandCreateResponse =
+        processV1(processor, DemandCommand.CREATE, request = request)
 
     @PostMapping("read")
-    fun readDemand(@RequestBody request: DemandReadRequest): DemandReadResponse {
-        val context = DemandContext()
-        context.fromTransport(request)
-        context.demandResponse = DeskSharingDemandStub.get()
-        return context.toTransportRead()
-    }
+    suspend fun readDemand(@RequestBody request: DemandReadRequest): DemandReadResponse =
+        processV1(processor, DemandCommand.READ, request = request)
 
     @PostMapping("update")
-    fun updateDemand(@RequestBody request: DemandUpdateRequest): DemandUpdateResponse {
-        val context = DemandContext()
-        context.fromTransport(request)
-        context.demandResponse = DeskSharingDemandStub.get()
-        return context.toTransportUpdate()
-    }
+    suspend fun updateDemand(@RequestBody request: DemandUpdateRequest): DemandUpdateResponse =
+        processV1(processor, DemandCommand.UPDATE, request = request)
 
     @PostMapping("unbook")
-    fun deleteDemand(@RequestBody request: DemandDeleteRequest): DemandDeleteResponse {
-        val context = DemandContext()
-        context.fromTransport(request)
-        context.demandResponse = DeskSharingDemandStub.get()
-        return context.toTransportDelete()
-    }
+    suspend fun deleteDemand(@RequestBody request: DemandDeleteRequest): DemandDeleteResponse =
+        processV1(processor, DemandCommand.DELETE, request = request)
 
     @PostMapping("search")
-    fun searchDemand(@RequestBody request: DemandSearchRequest): DemandSearchResponse {
-        val context = DemandContext()
-        context.fromTransport(request)
-        context.demandResponses.add(DeskSharingDemandStub.get())
-        return context.toTransportSearch()
-    }
+    suspend fun searchDemand(@RequestBody request: DemandSearchRequest): DemandSearchResponse =
+        processV1(processor, DemandCommand.SEARCH, request = request)
 
 }
