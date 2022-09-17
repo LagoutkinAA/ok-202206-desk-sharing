@@ -16,7 +16,7 @@ fun ICorChainDsl<DemandContext>.stubValidationBadId(title: String) = worker {
             DemandError(
                 group = "validation",
                 code = "validation-id",
-                field = "employeeId",
+                field = "id",
                 message = "Wrong id field"
             )
         )
