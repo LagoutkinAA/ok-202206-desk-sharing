@@ -208,9 +208,9 @@ components:
           type: string
           description: Идентификатор сотрудника
         status:
-          $ref: '#/components/schemas/DemandStatus'
+          $ref: '#/components/schemas/DemandApiStatus'
 
-    DemandStatus:
+    DemandApiStatus:
       type: string
       description: 'Статус заявки'
       enum:

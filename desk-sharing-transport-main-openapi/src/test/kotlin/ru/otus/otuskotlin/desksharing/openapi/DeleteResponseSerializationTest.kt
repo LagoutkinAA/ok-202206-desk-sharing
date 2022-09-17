@@ -14,7 +14,7 @@ class DeleteResponseSerializationTest {
             date = "2022-01-01",
             bookingDate = "2022-01-10",
             employeeId = "2e07327d-47e7-4da1-9c89-eff53a37c000",
-            status = DemandStatus.DELETED,
+            status = DemandApiStatus.DELETED,
             demandId = "2e07327d-47e7-4da1-9c89-eff53a37cfff",
             number = "01/001",
             workDeskNumber = "2e07327d-47e7-4da1-9c89-eff53a37caaa"

@@ -4,7 +4,6 @@ import fromTransport
 import kotlinx.datetime.LocalDate
 import org.junit.Test
 import ru.otus.otuskotlin.deskSharing.api.v1.models.*
-import ru.otus.otuskotlin.deskSharing.api.v1.models.DemandStatus
 import ru.otus.otuskotlin.desksharing.common.DemandContext
 import ru.otus.otuskotlin.desksharing.common.model.*
 import ru.otus.otuskotlin.desksharing.common.stubs.DemandStubs
@@ -26,7 +25,7 @@ class MapperCreateTest {
                 date = "2022-01-01",
                 bookingDate = "2022-01-10",
                 employeeId = "2e07327d-47e7-4da1-9c89-eff53a37c000",
-                status = DemandStatus.NEW
+                status = DemandApiStatus.NEW
             )
         )
 
@@ -81,7 +80,7 @@ class MapperCreateTest {
         assertEquals("2022-01-01", response.demand?.date)
         assertEquals("2022-01-10", response.demand?.bookingDate)
         assertEquals("2e07327d-47e7-4da1-9c89-eff53a37c000", response.demand?.employeeId)
-        assertEquals(DemandStatus.ERROR, response.demand?.status)
+        assertEquals(DemandApiStatus.ERROR, response.demand?.status)
         assertEquals("2e07327d-47e7-4da1-9c89-eff53a37cfff", response.demand?.demandId)
         assertNull(response.demand?.workDeskNumber)
         assertNull(response.demand?.number)

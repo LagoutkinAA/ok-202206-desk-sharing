@@ -14,7 +14,7 @@ class UpdateResponseSerializationTest {
             date = "2022-01-01",
             bookingDate = "2022-01-10",
             employeeId = "2e07327d-47e7-4da1-9c89-eff53a37c000",
-            status = DemandStatus.ACCEPTED,
+            status = DemandApiStatus.ACCEPTED,
             demandId = "2e07327d-47e7-4da1-9c89-eff53a37cfff",
             number = "01/001",
             workDeskNumber = "2e07327d-47e7-4da1-9c89-eff53a37caaa"

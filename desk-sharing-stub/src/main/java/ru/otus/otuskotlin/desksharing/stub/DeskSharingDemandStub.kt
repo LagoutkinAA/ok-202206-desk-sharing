@@ -6,7 +6,7 @@ import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
 import ru.otus.otuskotlin.desksharing.stub.DeskSharingDemand.DEMAND
 
 object DeskSharingDemandStub {
-    fun get(): DemandDto = DEMAND.copy()
+    fun get(): DemandDto = DEMAND
 
     fun prepareResult(block: DemandDto.() -> Unit): DemandDto = get().apply(block)
 

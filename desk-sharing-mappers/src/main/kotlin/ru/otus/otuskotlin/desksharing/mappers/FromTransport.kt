@@ -1,7 +1,6 @@
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.toLocalDate
 import ru.otus.otuskotlin.deskSharing.api.v1.models.*
-import ru.otus.otuskotlin.deskSharing.api.v1.models.DemandStatus
 import ru.otus.otuskotlin.desksharing.common.DemandContext
 import ru.otus.otuskotlin.desksharing.common.model.*
 import ru.otus.otuskotlin.desksharing.common.stubs.DemandStubs
@@ -21,14 +20,14 @@ private fun String?.toWorkDeskNumber() = this?.let { WorkDeskNumber(it) } ?: Wor
 private fun String?.toDemandWithId() = DemandDto(demandId = this.toDskShrngId())
 private fun IRequest?.requestId() = this?.requestId?.let { DemandRequestId(it) } ?: DemandRequestId.NONE
 
-private fun DemandStatus?.fromTransport(): ru.otus.otuskotlin.desksharing.common.model.DemandStatus = when (this) {
-    DemandStatus.NEW -> ru.otus.otuskotlin.desksharing.common.model.DemandStatus.NEW
-    DemandStatus.DECLINED -> ru.otus.otuskotlin.desksharing.common.model.DemandStatus.DECLINED
-    DemandStatus.DELETED -> ru.otus.otuskotlin.desksharing.common.model.DemandStatus.DELETED
-    DemandStatus.ACCEPTED -> ru.otus.otuskotlin.desksharing.common.model.DemandStatus.ACCEPTED
-    DemandStatus.ERROR -> ru.otus.otuskotlin.desksharing.common.model.DemandStatus.ERROR
-    DemandStatus.CONFIRMED -> ru.otus.otuskotlin.desksharing.common.model.DemandStatus.CONFIRMED
-    null -> ru.otus.otuskotlin.desksharing.common.model.DemandStatus.NONE
+private fun DemandApiStatus?.fromTransport(): DemandStatus = when (this) {
+    DemandApiStatus.NEW -> DemandStatus.NEW
+    DemandApiStatus.DECLINED -> DemandStatus.DECLINED
+    DemandApiStatus.DELETED -> DemandStatus.DELETED
+    DemandApiStatus.ACCEPTED -> DemandStatus.ACCEPTED
+    DemandApiStatus.ERROR -> DemandStatus.ERROR
+    DemandApiStatus.CONFIRMED -> DemandStatus.CONFIRMED
+    null -> DemandStatus.NONE
 }
 
 private fun DemandDebug?.transportToWorkMode(): DskShrngWorkMode = when (this?.mode) {

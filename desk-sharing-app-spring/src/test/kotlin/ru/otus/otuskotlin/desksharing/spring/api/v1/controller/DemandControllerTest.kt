@@ -28,85 +28,80 @@ internal class DemandControllerTest {
 
     @Test
     fun createDemand() {
-        val request = mapper.writeValueAsString(DemandCreateRequest())
+        val request = mapper.writeValueAsString(DemandCreateRequest(debug = DemandDebug(DemandRequestDebugMode.STUB, DemandRequestDebugStubs.SUCCESS)))
         val response = mapper.writeValueAsString(
             DemandContext().apply { demandResponse = DeskSharingDemandStub.get() }.toTransportCreate()
         )
 
-        mvc
-            .perform(
-                MockMvcRequestBuilders.post("/v1/demand/book")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(request)
-            )
+        mvc.perform(
+            MockMvcRequestBuilders.post("/v1/demand/book")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(request)
+        )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().json(response))
     }
 
     @Test
     fun readDemand() {
-        val request = mapper.writeValueAsString(DemandReadRequest())
+        val request = mapper.writeValueAsString(DemandReadRequest(debug = DemandDebug(DemandRequestDebugMode.STUB, DemandRequestDebugStubs.SUCCESS)))
         val response = mapper.writeValueAsString(
             DemandContext().apply { demandResponse = DeskSharingDemandStub.get() }.toTransportRead()
         )
 
-        mvc
-            .perform(
-                MockMvcRequestBuilders.post("/v1/demand/read")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(request)
-            )
+        mvc.perform(
+            MockMvcRequestBuilders.post("/v1/demand/read")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(request)
+        )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().json(response))
     }
 
     @Test
     fun updateDemand() {
-        val request = mapper.writeValueAsString(DemandUpdateRequest())
+        val request = mapper.writeValueAsString(DemandUpdateRequest(debug = DemandDebug(DemandRequestDebugMode.STUB, DemandRequestDebugStubs.SUCCESS)))
         val response = mapper.writeValueAsString(
             DemandContext().apply { demandResponse = DeskSharingDemandStub.get() }.toTransportUpdate()
         )
 
-        mvc
-            .perform(
-                MockMvcRequestBuilders.post("/v1/demand/update")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(request)
-            )
+        mvc.perform(
+            MockMvcRequestBuilders.post("/v1/demand/update")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(request)
+        )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().json(response))
     }
 
     @Test
     fun deleteDemand() {
-        val request = mapper.writeValueAsString(DemandDeleteRequest())
+        val request = mapper.writeValueAsString(DemandDeleteRequest(debug = DemandDebug(DemandRequestDebugMode.STUB, DemandRequestDebugStubs.SUCCESS)))
         val response = mapper.writeValueAsString(
             DemandContext().apply { demandResponse = DeskSharingDemandStub.get() }.toTransportDelete()
         )
 
-        mvc
-            .perform(
-                MockMvcRequestBuilders.post("/v1/demand/unbook")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(request)
-            )
+        mvc.perform(
+            MockMvcRequestBuilders.post("/v1/demand/unbook")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(request)
+        )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().json(response))
     }
 
     @Test
     fun searchDemand() {
-        val request = mapper.writeValueAsString(DemandSearchRequest())
+        val request = mapper.writeValueAsString(DemandSearchRequest(debug = DemandDebug(DemandRequestDebugMode.STUB, DemandRequestDebugStubs.SUCCESS)))
         val response = mapper.writeValueAsString(
             DemandContext().apply { demandResponses = mutableListOf(DeskSharingDemandStub.get()) }.toTransportSearch()
         )
 
-        mvc
-            .perform(
-                MockMvcRequestBuilders.post("/v1/demand/search")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(request)
-            )
+        mvc.perform(
+            MockMvcRequestBuilders.post("/v1/demand/search")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(request)
+        )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().json(response))
     }

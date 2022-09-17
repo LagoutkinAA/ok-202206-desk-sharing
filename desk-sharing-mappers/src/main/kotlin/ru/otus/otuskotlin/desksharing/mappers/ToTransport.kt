@@ -1,6 +1,5 @@
 import kotlinx.datetime.LocalDate
 import ru.otus.otuskotlin.deskSharing.api.v1.models.*
-import ru.otus.otuskotlin.deskSharing.api.v1.models.DemandStatus
 import ru.otus.otuskotlin.desksharing.common.DemandContext
 import ru.otus.otuskotlin.desksharing.common.model.*
 import ru.otus.otuskotlin.desksharing.mappers.exceptions.UnknownDemandCommand
@@ -91,12 +90,12 @@ private fun DemandError.toTransportDemand() = Error(
     message = message.takeIf { it.isNotBlank() },
 )
 
-private fun ru.otus.otuskotlin.desksharing.common.model.DemandStatus.toTransport(): DemandStatus? = when (this) {
-    ru.otus.otuskotlin.desksharing.common.model.DemandStatus.NEW -> DemandStatus.NEW
-    ru.otus.otuskotlin.desksharing.common.model.DemandStatus.DECLINED -> DemandStatus.DECLINED
-    ru.otus.otuskotlin.desksharing.common.model.DemandStatus.DELETED -> DemandStatus.DELETED
-    ru.otus.otuskotlin.desksharing.common.model.DemandStatus.ACCEPTED -> DemandStatus.ACCEPTED
-    ru.otus.otuskotlin.desksharing.common.model.DemandStatus.ERROR -> DemandStatus.ERROR
-    ru.otus.otuskotlin.desksharing.common.model.DemandStatus.CONFIRMED -> DemandStatus.CONFIRMED
-    ru.otus.otuskotlin.desksharing.common.model.DemandStatus.NONE -> null
+private fun DemandStatus.toTransport(): DemandApiStatus? = when (this) {
+    DemandStatus.NEW -> DemandApiStatus.NEW
+    DemandStatus.DECLINED -> DemandApiStatus.DECLINED
+    DemandStatus.DELETED -> DemandApiStatus.DELETED
+    DemandStatus.ACCEPTED -> DemandApiStatus.ACCEPTED
+    DemandStatus.ERROR -> DemandApiStatus.ERROR
+    DemandStatus.CONFIRMED -> DemandApiStatus.CONFIRMED
+    DemandStatus.NONE -> null
 }

@@ -4,7 +4,6 @@ import fromTransport
 import kotlinx.datetime.LocalDate
 import org.junit.Test
 import ru.otus.otuskotlin.deskSharing.api.v1.models.*
-import ru.otus.otuskotlin.deskSharing.api.v1.models.DemandStatus
 import ru.otus.otuskotlin.desksharing.common.DemandContext
 import ru.otus.otuskotlin.desksharing.common.model.*
 import ru.otus.otuskotlin.desksharing.common.stubs.DemandStubs
@@ -70,7 +69,7 @@ class MapperSearchTest {
         assertEquals("2022-01-01", response.demands?.firstOrNull()?.date)
         assertEquals("2022-01-10", response.demands?.firstOrNull()?.bookingDate)
         assertEquals("2e07327d-47e7-4da1-9c89-eff53a37c000", response.demands?.firstOrNull()?.employeeId)
-        assertEquals(DemandStatus.ACCEPTED, response.demands?.firstOrNull()?.status)
+        assertEquals(DemandApiStatus.ACCEPTED, response.demands?.firstOrNull()?.status)
         assertEquals("2e07327d-47e7-4da1-9c89-eff53a37cfff", response.demands?.firstOrNull()?.demandId)
         assertEquals("1/1", response.demands?.firstOrNull()?.workDeskNumber)
         assertEquals("01/001", response.demands?.firstOrNull()?.number)
