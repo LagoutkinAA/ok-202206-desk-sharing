@@ -5,6 +5,7 @@ enum class DemandStubs {
     SUCCESS,
     NOT_FOUND,
     BAD_ID,
-    CANNOT_DELETE
+    CANNOT_DELETE,
+    VALIDATION_ERROR
 
 }

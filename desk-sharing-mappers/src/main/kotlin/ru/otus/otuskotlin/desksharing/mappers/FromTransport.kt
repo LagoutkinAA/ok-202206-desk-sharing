@@ -42,6 +42,7 @@ private fun DemandDebug?.transportToStubCase(): DemandStubs = when (this?.stub) 
     DemandRequestDebugStubs.NOT_FOUND -> DemandStubs.NOT_FOUND
     DemandRequestDebugStubs.BAD_ID -> DemandStubs.BAD_ID
     DemandRequestDebugStubs.CANNOT_DELETE -> DemandStubs.CANNOT_DELETE
+    DemandRequestDebugStubs.VALIDATION_ERROR -> DemandStubs.VALIDATION_ERROR
     null -> DemandStubs.NONE
 }
 

@@ -429,3 +429,4 @@ components:
         - notFound
         - badId
         - cannotDelete
+        - validationError
