@@ -10,9 +10,11 @@ import ru.otus.otuskotlin.desksharing.common.model.*
 import ru.otus.otuskotlin.desksharing.common.stubs.DemandStubs
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
+import kotlin.test.fail
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class DemandUpdateStubTest {
+class DemandSearchStubTest {
 
     private val processor = DemandProcessor()
     val demandId = DskShrngId("d777")
@@ -22,50 +24,35 @@ class DemandUpdateStubTest {
     val bookingDate = LocalDate.now()
     val workDeskNumber = WorkDeskNumber("1/1")
     val number = "1"
+    val filter = DemandFilter(employeeId = employeeId, dateFrom = LocalDate.now(), dateTo = LocalDate.now())
 
     @Test
-    fun update() = runTest {
+    fun search() = runTest {
 
         val ctx = DemandContext(
             requestId = DemandRequestId("2e07327d-47e7-4da1-9c89-eff53a37cdb7"),
-            command = DemandCommand.UPDATE,
+            command = DemandCommand.SEARCH,
             state = DemandState.NONE,
             workMode = DskShrngWorkMode.STUB,
             stubCase = DemandStubs.SUCCESS,
-            demandRequest = DemandDto(
-                date = date,
-                bookingDate = bookingDate,
-                employeeId = employeeId,
-                status = DemandStatus.ACCEPTED,
-                demandId = demandId,
-                workDeskNumber = workDeskNumber,
-                number = number,
-                userId = userId
-            )
+            demandFilterRequest = filter
         )
         processor.exec(ctx)
-        assertEquals(demandId, ctx.demandResponse.demandId)
-        assertEquals(DemandStatus.ACCEPTED, ctx.demandResponse.status)
+        assertTrue(ctx.demandResponses.size > 1)
+        val first = ctx.demandResponses.firstOrNull() ?: fail("Empty response list")
+        assertEquals(employeeId, first.employeeId)
     }
+
 
     @Test
     fun badId() = runTest {
         val ctx = DemandContext(
             requestId = DemandRequestId("2e07327d-47e7-4da1-9c89-eff53a37cdb7"),
-            command = DemandCommand.UPDATE,
+            command = DemandCommand.SEARCH,
             state = DemandState.NONE,
             workMode = DskShrngWorkMode.STUB,
             stubCase = DemandStubs.BAD_ID,
-            demandRequest = DemandDto(
-                date = date,
-                bookingDate = bookingDate,
-                employeeId = employeeId,
-                status = DemandStatus.ACCEPTED,
-                demandId = demandId,
-                workDeskNumber = workDeskNumber,
-                number = number,
-                userId = userId
-            )
+            demandFilterRequest = filter
         )
         processor.exec(ctx)
         assertEquals("id", ctx.errors.firstOrNull()?.field)
@@ -76,44 +63,25 @@ class DemandUpdateStubTest {
     fun validationError() = runTest {
         val ctx = DemandContext(
             requestId = DemandRequestId("2e07327d-47e7-4da1-9c89-eff53a37cdb7"),
-            command = DemandCommand.UPDATE,
+            command = DemandCommand.SEARCH,
             state = DemandState.NONE,
             workMode = DskShrngWorkMode.STUB,
             stubCase = DemandStubs.VALIDATION_ERROR,
-            demandRequest = DemandDto(
-                date = date,
-                bookingDate = bookingDate,
-                employeeId = employeeId,
-                status = DemandStatus.ACCEPTED,
-                demandId = demandId,
-                workDeskNumber = workDeskNumber,
-                number = number,
-                userId = userId
-            )
+            demandFilterRequest = filter
         )
         processor.exec(ctx)
-        assertEquals("bookingDate", ctx.errors.firstOrNull()?.field)
-        assertEquals("validation", ctx.errors.firstOrNull()?.group)
+        assertEquals("stub", ctx.errors.firstOrNull()?.field)
     }
 
     @Test
     fun databaseError() = runTest {
         val ctx = DemandContext(
             requestId = DemandRequestId("2e07327d-47e7-4da1-9c89-eff53a37cdb7"),
-            command = DemandCommand.UPDATE,
+            command = DemandCommand.SEARCH,
             state = DemandState.NONE,
             workMode = DskShrngWorkMode.STUB,
             stubCase = DemandStubs.DB_ERROR,
-            demandRequest = DemandDto(
-                date = date,
-                bookingDate = bookingDate,
-                employeeId = employeeId,
-                status = DemandStatus.ACCEPTED,
-                demandId = demandId,
-                workDeskNumber = workDeskNumber,
-                number = number,
-                userId = userId
-            )
+            demandFilterRequest = filter
         )
         processor.exec(ctx)
         assertEquals("internal", ctx.errors.firstOrNull()?.group)

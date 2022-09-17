@@ -104,7 +104,7 @@ class DemandProcessor() {
                     stubNoCase("Ошибка: запрошенный стаб недопустим")
                 }
                 validation {
-                    worker("Копируем поля в adFilterValidating") {
+                    worker("Копируем поля в demandRequestValidating") {
                         demandFilterRequestValidating = demandFilterRequest.copy()
                     }
 

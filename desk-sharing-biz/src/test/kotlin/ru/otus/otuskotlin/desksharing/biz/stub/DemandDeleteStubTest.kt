@@ -12,7 +12,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class DemandUpdateStubTest {
+class DemandDeleteStubTest {
 
     private val processor = DemandProcessor()
     val demandId = DskShrngId("d777")
@@ -24,11 +24,11 @@ class DemandUpdateStubTest {
     val number = "1"
 
     @Test
-    fun update() = runTest {
+    fun delete() = runTest {
 
         val ctx = DemandContext(
             requestId = DemandRequestId("2e07327d-47e7-4da1-9c89-eff53a37cdb7"),
-            command = DemandCommand.UPDATE,
+            command = DemandCommand.DELETE,
             state = DemandState.NONE,
             workMode = DskShrngWorkMode.STUB,
             stubCase = DemandStubs.SUCCESS,
@@ -36,7 +36,7 @@ class DemandUpdateStubTest {
                 date = date,
                 bookingDate = bookingDate,
                 employeeId = employeeId,
-                status = DemandStatus.ACCEPTED,
+                status = DemandStatus.NEW,
                 demandId = demandId,
                 workDeskNumber = workDeskNumber,
                 number = number,
@@ -45,14 +45,14 @@ class DemandUpdateStubTest {
         )
         processor.exec(ctx)
         assertEquals(demandId, ctx.demandResponse.demandId)
-        assertEquals(DemandStatus.ACCEPTED, ctx.demandResponse.status)
+        assertEquals(DemandStatus.NEW, ctx.demandResponse.status)
     }
 
     @Test
     fun badId() = runTest {
         val ctx = DemandContext(
             requestId = DemandRequestId("2e07327d-47e7-4da1-9c89-eff53a37cdb7"),
-            command = DemandCommand.UPDATE,
+            command = DemandCommand.DELETE,
             state = DemandState.NONE,
             workMode = DskShrngWorkMode.STUB,
             stubCase = DemandStubs.BAD_ID,
@@ -76,7 +76,7 @@ class DemandUpdateStubTest {
     fun validationError() = runTest {
         val ctx = DemandContext(
             requestId = DemandRequestId("2e07327d-47e7-4da1-9c89-eff53a37cdb7"),
-            command = DemandCommand.UPDATE,
+            command = DemandCommand.DELETE,
             state = DemandState.NONE,
             workMode = DskShrngWorkMode.STUB,
             stubCase = DemandStubs.VALIDATION_ERROR,
@@ -92,15 +92,14 @@ class DemandUpdateStubTest {
             )
         )
         processor.exec(ctx)
-        assertEquals("bookingDate", ctx.errors.firstOrNull()?.field)
-        assertEquals("validation", ctx.errors.firstOrNull()?.group)
+        assertEquals("stub", ctx.errors.firstOrNull()?.field)
     }
 
     @Test
     fun databaseError() = runTest {
         val ctx = DemandContext(
             requestId = DemandRequestId("2e07327d-47e7-4da1-9c89-eff53a37cdb7"),
-            command = DemandCommand.UPDATE,
+            command = DemandCommand.DELETE,
             state = DemandState.NONE,
             workMode = DskShrngWorkMode.STUB,
             stubCase = DemandStubs.DB_ERROR,

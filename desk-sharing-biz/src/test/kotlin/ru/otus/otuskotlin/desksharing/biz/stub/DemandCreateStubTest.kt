@@ -12,10 +12,10 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class DemandUpdateStubTest {
+class DemandCreateStubTest {
 
     private val processor = DemandProcessor()
-    val demandId = DskShrngId("d777")
+    val demandId = DskShrngId("2e07327d-ffff-4da1-9c89-eff53a37c000")
     val employeeId = DskShrngId("e777")
     val userId = DemandUserId("u777")
     val date = LocalDate.now()
@@ -24,11 +24,11 @@ class DemandUpdateStubTest {
     val number = "1"
 
     @Test
-    fun update() = runTest {
+    fun create() = runTest {
 
         val ctx = DemandContext(
             requestId = DemandRequestId("2e07327d-47e7-4da1-9c89-eff53a37cdb7"),
-            command = DemandCommand.UPDATE,
+            command = DemandCommand.CREATE,
             state = DemandState.NONE,
             workMode = DskShrngWorkMode.STUB,
             stubCase = DemandStubs.SUCCESS,
@@ -36,23 +36,21 @@ class DemandUpdateStubTest {
                 date = date,
                 bookingDate = bookingDate,
                 employeeId = employeeId,
-                status = DemandStatus.ACCEPTED,
-                demandId = demandId,
-                workDeskNumber = workDeskNumber,
+                status = DemandStatus.NONE,
                 number = number,
                 userId = userId
             )
         )
         processor.exec(ctx)
         assertEquals(demandId, ctx.demandResponse.demandId)
-        assertEquals(DemandStatus.ACCEPTED, ctx.demandResponse.status)
+        assertEquals(DemandStatus.NEW, ctx.demandResponse.status)
     }
 
     @Test
     fun badId() = runTest {
         val ctx = DemandContext(
             requestId = DemandRequestId("2e07327d-47e7-4da1-9c89-eff53a37cdb7"),
-            command = DemandCommand.UPDATE,
+            command = DemandCommand.CREATE,
             state = DemandState.NONE,
             workMode = DskShrngWorkMode.STUB,
             stubCase = DemandStubs.BAD_ID,
@@ -60,9 +58,7 @@ class DemandUpdateStubTest {
                 date = date,
                 bookingDate = bookingDate,
                 employeeId = employeeId,
-                status = DemandStatus.ACCEPTED,
-                demandId = demandId,
-                workDeskNumber = workDeskNumber,
+                status = DemandStatus.NONE,
                 number = number,
                 userId = userId
             )
@@ -76,7 +72,7 @@ class DemandUpdateStubTest {
     fun validationError() = runTest {
         val ctx = DemandContext(
             requestId = DemandRequestId("2e07327d-47e7-4da1-9c89-eff53a37cdb7"),
-            command = DemandCommand.UPDATE,
+            command = DemandCommand.CREATE,
             state = DemandState.NONE,
             workMode = DskShrngWorkMode.STUB,
             stubCase = DemandStubs.VALIDATION_ERROR,
@@ -84,9 +80,7 @@ class DemandUpdateStubTest {
                 date = date,
                 bookingDate = bookingDate,
                 employeeId = employeeId,
-                status = DemandStatus.ACCEPTED,
-                demandId = demandId,
-                workDeskNumber = workDeskNumber,
+                status = DemandStatus.NONE,
                 number = number,
                 userId = userId
             )
@@ -100,7 +94,7 @@ class DemandUpdateStubTest {
     fun databaseError() = runTest {
         val ctx = DemandContext(
             requestId = DemandRequestId("2e07327d-47e7-4da1-9c89-eff53a37cdb7"),
-            command = DemandCommand.UPDATE,
+            command = DemandCommand.CREATE,
             state = DemandState.NONE,
             workMode = DskShrngWorkMode.STUB,
             stubCase = DemandStubs.DB_ERROR,
@@ -108,9 +102,7 @@ class DemandUpdateStubTest {
                 date = date,
                 bookingDate = bookingDate,
                 employeeId = employeeId,
-                status = DemandStatus.ACCEPTED,
-                demandId = demandId,
-                workDeskNumber = workDeskNumber,
+                status = DemandStatus.NONE,
                 number = number,
                 userId = userId
             )
