@@ -10,3 +10,8 @@ val Instant.Companion.NONE
 
 val LocalDate.Companion.NONE
     get() = DATE_NONE
+
+fun LocalDate.Companion.now(): LocalDate {
+    val now = java.time.LocalDate.now()
+    return LocalDate(now.year, now.month, now.dayOfMonth)
+}

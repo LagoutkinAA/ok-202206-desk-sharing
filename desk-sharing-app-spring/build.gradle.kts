@@ -20,14 +20,12 @@ dependencies {
     val datetimeVersion: String by project
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
 
-    // transport models
+    // project modules
     implementation(project(":desk-sharing-common"))
     implementation(project(":desk-sharing-mappers"))
     implementation(project(":desk-sharing-transport-main-openapi"))
     implementation(project(":desk-sharing-stub"))
-
-    // Stubs
-    //implementation(project(":desk-sharing-stubs"))
+    implementation(project(":desk-sharing-biz"))
 
     // tests
     testImplementation("org.springframework.boot:spring-boot-starter-test")

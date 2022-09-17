@@ -4,6 +4,7 @@ import NONE
 import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.plus
+import now
 import org.junit.Test
 import ru.otus.otuskotlin.desksharing.common.model.DemandUserId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
@@ -18,24 +19,22 @@ class ValidationTest {
 
     @Test
     fun inRange() {
-        val now = java.time.LocalDate.now()
-        val dateFrom = LocalDate(now.year, now.month, now.dayOfMonth).plus(DatePeriod(days = 1))
+        val dateFrom = LocalDate.now().plus(DatePeriod(days = 1))
         val dateTo = dateFrom.plus(DatePeriod(months = 1))
 
         val validator = ValidatorInRange<LocalDate>("bookingDate", dateFrom, dateTo)
-        val result = validator.validate(LocalDate(now.year, now.month, now.dayOfMonth).plus(DatePeriod(days = 2)))
+        val result = validator.validate(LocalDate.now().plus(DatePeriod(days = 2)))
 
         assertEquals(true, result.isSuccess)
     }
 
     @Test
     fun outRange() {
-        val now = java.time.LocalDate.now()
-        val dateFrom = LocalDate(now.year, now.month, now.dayOfMonth).plus(DatePeriod(days = 1))
+        val dateFrom = LocalDate.now().plus(DatePeriod(days = 1))
         val dateTo = dateFrom.plus(DatePeriod(months = 1))
 
         val validator = ValidatorInRange<LocalDate>("bookingDate", dateFrom, dateTo)
-        val result = validator.validate(LocalDate(now.year, now.month, now.dayOfMonth))
+        val result = validator.validate(LocalDate.now())
 
         assertEquals(false, result.isSuccess)
         assertContains(result.errors.firstOrNull()?.message ?: "", "bookingDate")

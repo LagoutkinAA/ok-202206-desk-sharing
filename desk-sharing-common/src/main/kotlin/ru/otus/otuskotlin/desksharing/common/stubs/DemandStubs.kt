@@ -6,6 +6,8 @@ enum class DemandStubs {
     NOT_FOUND,
     BAD_ID,
     CANNOT_DELETE,
-    VALIDATION_ERROR
+    VALIDATION_ERROR,
+    NO_FREE_WORK_DESK,
+    DB_ERROR
 
 }
