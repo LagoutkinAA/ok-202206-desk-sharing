@@ -41,7 +41,7 @@ class DemandProcessor() {
             }
             operation("Получить заявку", DemandCommand.READ) {
                 stubs("Обработка стабов") {
-                    stubCreateSuccess("Имитация успешной обработки")
+                    stubReadSuccess("Имитация успешной обработки")
                     stubValidationBadId("Имитация ошибки валидации id")
                     stubDbError("Имитация ошибки работы с БД")
                     stubNoCase("Ошибка: запрошенный стаб недопустим")
@@ -58,7 +58,7 @@ class DemandProcessor() {
             }
             operation("Изменить заявку", DemandCommand.UPDATE) {
                 stubs("Обработка стабов") {
-                    stubCreateSuccess("Имитация успешной обработки")
+                    stubUpdateSuccess("Имитация успешной обработки")
                     stubValidationBadId("Имитация ошибки валидации id")
                     stubValidationBadBookingDate("Имитация ошибки валидации даты бронирования")
                     stubDbError("Имитация ошибки работы с БД")

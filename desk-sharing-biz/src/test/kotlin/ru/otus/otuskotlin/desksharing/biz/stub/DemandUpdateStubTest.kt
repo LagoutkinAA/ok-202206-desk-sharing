@@ -36,7 +36,7 @@ class DemandUpdateStubTest {
                 date = date,
                 bookingDate = bookingDate,
                 employeeId = employeeId,
-                status = DemandStatus.ACCEPTED,
+                status = DemandStatus.CONFIRMED,
                 demandId = demandId,
                 workDeskNumber = workDeskNumber,
                 number = number,
@@ -45,7 +45,7 @@ class DemandUpdateStubTest {
         )
         processor.exec(ctx)
         assertEquals(demandId, ctx.demandResponse.demandId)
-        assertEquals(DemandStatus.ACCEPTED, ctx.demandResponse.status)
+        assertEquals(DemandStatus.CONFIRMED, ctx.demandResponse.status)
     }
 
     @Test
