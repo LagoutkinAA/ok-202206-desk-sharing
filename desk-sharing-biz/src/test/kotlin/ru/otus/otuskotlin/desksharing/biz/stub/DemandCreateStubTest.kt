@@ -1,8 +1,11 @@
 package ru.otus.otuskotlin.desksharing.biz.stub
 
+import NONE
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.plus
 import now
 import ru.otus.otuskotlin.desksharing.biz.DemandProcessor
 import ru.otus.otuskotlin.desksharing.common.DemandContext
@@ -19,12 +22,12 @@ class DemandCreateStubTest {
     val employeeId = DskShrngId("e777")
     val userId = DemandUserId("u777")
     val date = LocalDate.now()
-    val bookingDate = LocalDate.now()
+    val bookingDate = LocalDate.now().plus(DatePeriod(days = 1))
     val workDeskNumber = WorkDeskNumber("1/1")
     val number = "1"
 
     @Test
-    fun create() = runTest {
+    fun createSuccess() = runTest {
 
         val ctx = DemandContext(
             requestId = DemandRequestId("2e07327d-47e7-4da1-9c89-eff53a37cdb7"),
@@ -33,17 +36,47 @@ class DemandCreateStubTest {
             workMode = DskShrngWorkMode.STUB,
             stubCase = DemandStubs.SUCCESS,
             demandRequest = DemandDto(
-                date = date,
+                date = LocalDate.NONE,
                 bookingDate = bookingDate,
                 employeeId = employeeId,
                 status = DemandStatus.NONE,
-                number = number,
+                number = "",
                 userId = userId
             )
         )
         processor.exec(ctx)
         assertEquals(demandId, ctx.demandResponse.demandId)
-        assertEquals(DemandStatus.NEW, ctx.demandResponse.status)
+        assertEquals(DemandStatus.ACCEPTED, ctx.demandResponse.status)
+        assertEquals(date, ctx.demandResponse.date)
+        assertEquals(number, ctx.demandResponse.number)
+        assertEquals(workDeskNumber, ctx.demandResponse.workDeskNumber)
+    }
+
+    @Test
+    fun createDeclined() = runTest {
+
+        val ctx = DemandContext(
+            requestId = DemandRequestId("2e07327d-47e7-4da1-9c89-eff53a37cdb7"),
+            command = DemandCommand.CREATE,
+            state = DemandState.NONE,
+            workMode = DskShrngWorkMode.STUB,
+            stubCase = DemandStubs.NO_FREE_WORK_DESK,
+            demandRequest = DemandDto(
+                date = LocalDate.NONE,
+                bookingDate = bookingDate,
+                employeeId = employeeId,
+                status = DemandStatus.NONE,
+                number = "",
+                userId = userId
+            )
+        )
+        processor.exec(ctx)
+        assertEquals(demandId, ctx.demandResponse.demandId)
+        assertEquals(DemandStatus.DECLINED, ctx.demandResponse.status)
+        assertEquals(date, ctx.demandResponse.date)
+        assertEquals(number, ctx.demandResponse.number)
+        assertEquals(WorkDeskNumber.NONE, ctx.demandResponse.workDeskNumber)
+        assertEquals("No free workdesk", ctx.demandResponse.declineReason)
     }
 
     @Test

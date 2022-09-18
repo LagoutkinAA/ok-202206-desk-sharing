@@ -45,7 +45,7 @@ class DemandDeleteStubTest {
         )
         processor.exec(ctx)
         assertEquals(demandId, ctx.demandResponse.demandId)
-        assertEquals(DemandStatus.NEW, ctx.demandResponse.status)
+        assertEquals(DemandStatus.DELETED, ctx.demandResponse.status)
     }
 
     @Test

@@ -22,6 +22,7 @@ class DemandProcessor() {
                     stubValidationBadId("Имитация ошибки валидации id")
                     stubValidationBadBookingDate("Имитация ошибки валидации даты бронирования")
                     stubDbError("Имитация ошибки работы с БД")
+                    stubCreateDeclined("Нет свободных рабочих мест")
                     stubNoCase("Ошибка: запрошенный стаб недопустим")
                 }
                 validation {

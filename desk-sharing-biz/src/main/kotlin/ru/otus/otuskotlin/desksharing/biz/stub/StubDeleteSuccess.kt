@@ -2,6 +2,7 @@ package ru.otus.otuskotlin.desksharing.biz.stub
 
 import ru.otus.otuskotlin.desksharing.common.DemandContext
 import ru.otus.otuskotlin.desksharing.common.model.DemandState
+import ru.otus.otuskotlin.desksharing.common.model.DemandStatus
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
 import ru.otus.otuskotlin.desksharing.common.stubs.DemandStubs
 import ru.otus.otuskotlin.desksharing.cor.ICorChainDsl
@@ -15,6 +16,7 @@ fun ICorChainDsl<DemandContext>.stubDeleteSuccess(title: String) = worker {
         state = DemandState.FINISHING
         val stub = DeskSharingDemandStub.prepareResult {
             demandRequest.demandId.takeIf { it != DskShrngId.NONE }?.also { this.demandId = it }
+            this.status = DemandStatus.DELETED
         }
         demandResponse = stub
     }
