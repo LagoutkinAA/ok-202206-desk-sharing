@@ -4,4 +4,5 @@ enum class DemandState {
     NONE,
     RUNNING,
     FAILING,
+    FINISHING
 }

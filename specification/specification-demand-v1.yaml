@@ -429,3 +429,6 @@ components:
         - notFound
         - badId
         - cannotDelete
+        - validationError
+        - noFreeWorkDesk
+        - dbError
