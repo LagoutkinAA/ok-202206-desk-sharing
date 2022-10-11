@@ -10,6 +10,7 @@ pluginManagement {
         val springDependencyManagementVersion: String by settings
         val pluginSpringVersion: String by settings
         val pluginJpa: String by settings
+        val bmuschkoVersion: String by settings
 
         kotlin("jvm") version kotlinVersion apply false
         kotlin("multiplatform") version kotlinVersion apply false
@@ -22,6 +23,9 @@ pluginManagement {
         id("io.spring.dependency-management") version springDependencyManagementVersion apply false
         kotlin("plugin.spring") version pluginSpringVersion apply false
         kotlin("plugin.jpa") version pluginJpa apply false
+
+        id("com.bmuschko.docker-java-application") version bmuschkoVersion apply false
+        id("com.bmuschko.docker-remote-api") version bmuschkoVersion apply false
 
     }
 }
@@ -36,3 +40,4 @@ include("desk-sharing-stub")
 include("desk-sharing-lib-cor")
 include("desk-sharing-lib-validation")
 include("desk-sharing-biz")
+include("desk-sharing-kafka")
