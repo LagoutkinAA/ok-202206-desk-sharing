@@ -21,5 +21,9 @@ data class DemandDto (
     fun deepCopy(): DemandDto = copy(
         permissions = permissions.toMutableSet()
     )
+
+    companion object {
+        val NONE get() = DemandDto()
+    }
 }
 

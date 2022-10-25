@@ -10,10 +10,10 @@ object DeskSharingDemandStub {
 
     fun prepareResult(block: DemandDto.() -> Unit): DemandDto = get().apply(block)
 
-    fun prepareSearchList(employeeId: DskShrngId, demandDate: LocalDate, bookingDate: LocalDate) = listOf(
-        deskSharingDemand("2e07327d-ffff-4da1-9c89-eff53a37c000", employeeId, demandDate, bookingDate),
-        deskSharingDemand("2e07327d-ffff-4da1-9c89-eff53a37c001", employeeId, demandDate, bookingDate),
-        deskSharingDemand("2e07327d-ffff-4da1-9c89-eff53a37c002", employeeId, demandDate, bookingDate)
+    fun prepareSearchList(employeeId: DskShrngId, dateFrom: LocalDate, dateTo: LocalDate) = listOf(
+        deskSharingDemand("2e07327d-ffff-4da1-9c89-eff53a37c000", employeeId, dateFrom, dateTo),
+        deskSharingDemand("2e07327d-ffff-4da1-9c89-eff53a37c001", employeeId, dateFrom, dateTo),
+        deskSharingDemand("2e07327d-ffff-4da1-9c89-eff53a37c002", employeeId, dateFrom, dateTo)
     )
 
     private fun deskSharingDemand(id: String, employeeId: DskShrngId, demandDate: LocalDate, bookingDate: LocalDate) =
