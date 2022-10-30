@@ -1,17 +1,18 @@
 package ru.otus.otuskotlin.desksharing.repository.cassandra.model
 
-import NONE
 import com.datastax.oss.driver.api.core.type.DataTypes
 import com.datastax.oss.driver.api.mapper.annotations.CqlName
 import com.datastax.oss.driver.api.mapper.annotations.Entity
 import com.datastax.oss.driver.api.mapper.annotations.PartitionKey
 import com.datastax.oss.driver.api.querybuilder.SchemaBuilder
-import kotlinx.datetime.LocalDate
+import fromJavaLocalDate
 import ru.otus.otuskotlin.desksharing.common.model.DemandDto
 import ru.otus.otuskotlin.desksharing.common.model.DemandStatus
 import ru.otus.otuskotlin.desksharing.common.model.DemandUserId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
 import ru.otus.otuskotlin.desksharing.common.model.WorkDeskNumber
+import toJavaLocalDate
+import java.time.LocalDate
 
 @Entity
 data class DemandCassandraEntity(
@@ -39,8 +40,8 @@ data class DemandCassandraEntity(
 ) {
     constructor(model: DemandDto) : this(
         demandId = model.demandId.asString().takeIf { it.isNotBlank() },
-        date = model.date.takeIf { it != LocalDate.NONE },
-        bookingDate = model.bookingDate.takeIf { it != LocalDate.NONE },
+        date = kotlinx.datetime.LocalDate.toJavaLocalDate(model.date),
+        bookingDate = kotlinx.datetime.LocalDate.toJavaLocalDate(model.bookingDate),
         employeeId = model.employeeId.asString().takeIf { it.isNotBlank() },
         status = model.status.name.takeIf { it.isNotBlank() },
         number = model.number.takeIf { it.isNotBlank() },
@@ -51,8 +52,8 @@ data class DemandCassandraEntity(
     )
 
     fun toInternal() = DemandDto(
-        date = date ?: LocalDate.NONE,
-        bookingDate = bookingDate ?: LocalDate.NONE,
+        date = kotlinx.datetime.LocalDate.fromJavaLocalDate(date),
+        bookingDate = kotlinx.datetime.LocalDate.fromJavaLocalDate(bookingDate),
         employeeId = employeeId?.let { DskShrngId(it) } ?: DskShrngId.NONE,
         status = status?.let { DemandStatus.valueOf(it) } ?: DemandStatus.NONE,
         number = number ?: "",

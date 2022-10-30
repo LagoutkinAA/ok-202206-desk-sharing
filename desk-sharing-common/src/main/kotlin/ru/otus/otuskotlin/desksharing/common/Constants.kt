@@ -19,3 +19,11 @@ fun LocalDate.Companion.now(): LocalDate {
     val now = java.time.LocalDate.now()
     return LocalDate(now.year, now.month, now.dayOfMonth)
 }
+
+fun LocalDate.Companion.toJavaLocalDate(source: LocalDate): java.time.LocalDate? {
+    return if (source == LocalDate.NONE) null else java.time.LocalDate.of(source.year, source.month, source.dayOfMonth)
+}
+
+fun LocalDate.Companion.fromJavaLocalDate(source: java.time.LocalDate?): LocalDate {
+    return if (source == null) LocalDate.NONE else LocalDate(source.year, source.month, source.dayOfMonth)
+}

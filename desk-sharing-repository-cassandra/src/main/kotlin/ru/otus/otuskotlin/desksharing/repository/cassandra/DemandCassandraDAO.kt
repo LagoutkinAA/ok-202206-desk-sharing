@@ -16,17 +16,17 @@ interface DemandCassandraDAO {
     fun create(dto: DemandCassandraEntity): CompletionStage<Unit>
 
     @Select
-    fun read(id: String): CompletionStage<DemandCassandraEntity?>
+    fun read(demandId: String): CompletionStage<DemandCassandraEntity?>
 
     @Update(customIfClause = "lock = :prevLock")
     fun update(dto: DemandCassandraEntity, prevLock: String): CompletionStage<Boolean>
 
     @Delete(
-        customWhereClause = "demandId = :demandId",
+        customWhereClause = "demand_id = :demandId",
         customIfClause = "lock = :prevLock",
         entityClass = [DemandCassandraEntity::class]
     )
-    fun delete(id: String, prevLock: String): CompletionStage<Boolean>
+    fun delete(demandId: String, prevLock: String): CompletionStage<Boolean>
 
     @QueryProvider(providerClass = DemandCassandraSearchProvider::class, entityHelpers = [DemandCassandraEntity::class])
     fun search(filter: DbDemandFilterRequest): CompletionStage<Collection<DemandCassandraEntity>>
