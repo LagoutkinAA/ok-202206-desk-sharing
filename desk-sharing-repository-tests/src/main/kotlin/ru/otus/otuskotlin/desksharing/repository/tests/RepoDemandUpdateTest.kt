@@ -48,7 +48,7 @@ abstract class RepoDemandUpdateTest {
         assertEquals(false, result.isSuccess)
         assertEquals(null, result.data)
         val error = result.errors.find { it.code == "not-found" }
-        assertEquals("id", error?.field)
+        assertEquals("demandId", error?.field)
     }
 
     @Test
