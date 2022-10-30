@@ -8,19 +8,19 @@ import ru.otus.otuskotlin.desksharing.common.model.DemandUserId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
 import ru.otus.otuskotlin.desksharing.common.model.WorkDeskNumber
 
-abstract class BaseInitDemands(val op: String) : IInitObjects<DemandDto> {
+abstract class BaseInitDemands(val operation: String) : IInitObjects<DemandDto> {
 
     open val lockOld: String = "20000000-0000-0000-0000-000000000001"
     open val lockBad: String = "20000000-0000-0000-0000-000000000009"
 
     fun createInitTestModel(
         suf: String,
-        demandId: DskShrngId = DskShrngId("ad-repo-$op-$suf"),
+        demandId: DskShrngId = DskShrngId("ad-repo-$operation-$suf"),
         employeeId: DskShrngId = DskShrngId("e777"),
         userId: DemandUserId = DemandUserId("u777"),
         date: LocalDate = LocalDate.now(),
         bookingDate: LocalDate = LocalDate.now(),
-        workDeskNumber: WorkDeskNumber = WorkDeskNumber("1/1"),
+        workDeskNumber: WorkDeskNumber = WorkDeskNumber("1"),
         number: String = "1",
         lock: String = lockOld
     ) = DemandDto(

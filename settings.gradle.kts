@@ -8,7 +8,6 @@ pluginManagement {
         val openapiVersion: String by settings
         val springframeworkBootVersion: String by settings
         val springDependencyManagementVersion: String by settings
-        val pluginSpringVersion: String by settings
         val pluginJpa: String by settings
         val bmuschkoVersion: String by settings
 
@@ -21,7 +20,7 @@ pluginManagement {
 
         id("org.springframework.boot") version springframeworkBootVersion apply false
         id("io.spring.dependency-management") version springDependencyManagementVersion apply false
-        kotlin("plugin.spring") version pluginSpringVersion apply false
+        kotlin("plugin.spring") version kotlinVersion apply false
         kotlin("plugin.jpa") version pluginJpa apply false
 
         id("com.bmuschko.docker-java-application") version bmuschkoVersion apply false
@@ -43,3 +42,4 @@ include("desk-sharing-biz")
 include("desk-sharing-kafka")
 include("desk-sharing-repository-stub")
 include("desk-sharing-repository-tests")
+include("desk-sharing-repository-inmemory")
