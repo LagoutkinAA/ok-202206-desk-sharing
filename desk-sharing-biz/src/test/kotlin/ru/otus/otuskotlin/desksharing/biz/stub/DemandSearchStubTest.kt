@@ -6,7 +6,14 @@ import kotlinx.datetime.LocalDate
 import now
 import ru.otus.otuskotlin.desksharing.biz.DemandProcessor
 import ru.otus.otuskotlin.desksharing.common.DemandContext
-import ru.otus.otuskotlin.desksharing.common.model.*
+import ru.otus.otuskotlin.desksharing.common.model.DemandCommand
+import ru.otus.otuskotlin.desksharing.common.model.DemandFilter
+import ru.otus.otuskotlin.desksharing.common.model.DemandRequestId
+import ru.otus.otuskotlin.desksharing.common.model.DemandState
+import ru.otus.otuskotlin.desksharing.common.model.DemandUserId
+import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
+import ru.otus.otuskotlin.desksharing.common.model.DskShrngWorkMode
+import ru.otus.otuskotlin.desksharing.common.model.WorkDeskNumber
 import ru.otus.otuskotlin.desksharing.common.stubs.DemandStubs
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -38,8 +45,8 @@ class DemandSearchStubTest {
             demandFilterRequest = filter
         )
         processor.exec(ctx)
-        assertTrue(ctx.demandResponses.size > 1)
-        val first = ctx.demandResponses.firstOrNull() ?: fail("Empty response list")
+        assertTrue(ctx.demandsResponse.size > 1)
+        val first = ctx.demandsResponse.firstOrNull() ?: fail("Empty response list")
         assertEquals(employeeId, first.employeeId)
     }
 

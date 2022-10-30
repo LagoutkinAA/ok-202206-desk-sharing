@@ -3,9 +3,22 @@ package ru.otus.otuskotlin.desksharing.mappers
 import fromTransport
 import kotlinx.datetime.LocalDate
 import org.junit.Test
-import ru.otus.otuskotlin.deskSharing.api.v1.models.*
+import ru.otus.otuskotlin.deskSharing.api.v1.models.DemandApiStatus
+import ru.otus.otuskotlin.deskSharing.api.v1.models.DemandDebug
+import ru.otus.otuskotlin.deskSharing.api.v1.models.DemandRequestDebugMode
+import ru.otus.otuskotlin.deskSharing.api.v1.models.DemandRequestDebugStubs
+import ru.otus.otuskotlin.deskSharing.api.v1.models.DemandSearchFilter
+import ru.otus.otuskotlin.deskSharing.api.v1.models.DemandSearchRequest
+import ru.otus.otuskotlin.deskSharing.api.v1.models.DemandSearchResponse
+import ru.otus.otuskotlin.deskSharing.api.v1.models.ResponseResult
 import ru.otus.otuskotlin.desksharing.common.DemandContext
-import ru.otus.otuskotlin.desksharing.common.model.*
+import ru.otus.otuskotlin.desksharing.common.model.DemandCommand
+import ru.otus.otuskotlin.desksharing.common.model.DemandDto
+import ru.otus.otuskotlin.desksharing.common.model.DemandRequestId
+import ru.otus.otuskotlin.desksharing.common.model.DemandState
+import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
+import ru.otus.otuskotlin.desksharing.common.model.DskShrngWorkMode
+import ru.otus.otuskotlin.desksharing.common.model.WorkDeskNumber
 import ru.otus.otuskotlin.desksharing.common.stubs.DemandStubs
 import toTransportDemand
 import kotlin.test.assertEquals
@@ -49,7 +62,7 @@ class MapperSearchTest {
             state = DemandState.RUNNING,
             workMode = DskShrngWorkMode.STUB,
             stubCase = DemandStubs.SUCCESS,
-            demandResponses = mutableListOf(
+            demandsResponse = mutableListOf(
                 DemandDto(
                     date = LocalDate(2022, 1, 1),
                     bookingDate = LocalDate(2022, 1, 10),

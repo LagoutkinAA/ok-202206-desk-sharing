@@ -17,4 +17,7 @@ dependencies {
     testImplementation(kotlin("test-common"))
     testImplementation(kotlin("test-annotations-common"))
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
+
+    testImplementation(project(":desk-sharing-repository-stub"))
+    testImplementation(project(":desk-sharing-repository-tests"))
 }
