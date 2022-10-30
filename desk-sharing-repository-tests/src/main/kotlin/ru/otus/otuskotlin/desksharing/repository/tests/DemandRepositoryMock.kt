@@ -8,29 +8,29 @@ import ru.otus.otuskotlin.desksharing.common.repository.DbDemandsResponse
 import ru.otus.otuskotlin.desksharing.common.repository.IDemandRepository
 
 class DemandRepositoryMock(
-    private val invokeCreateAd: (DbDemandRequest) -> DbDemandResponse = { DbDemandResponse.MOCK_SUCCESS_EMPTY },
-    private val invokeReadAd: (DbDemandIdRequest) -> DbDemandResponse = { DbDemandResponse.MOCK_SUCCESS_EMPTY },
-    private val invokeUpdateAd: (DbDemandRequest) -> DbDemandResponse = { DbDemandResponse.MOCK_SUCCESS_EMPTY },
-    private val invokeDeleteAd: (DbDemandIdRequest) -> DbDemandResponse = { DbDemandResponse.MOCK_SUCCESS_EMPTY },
-    private val invokeSearchAd: (DbDemandFilterRequest) -> DbDemandsResponse = { DbDemandsResponse.MOCK_SUCCESS_EMPTY },
+    private val invokeCreateDemand: (DbDemandRequest) -> DbDemandResponse = { DbDemandResponse.MOCK_SUCCESS_EMPTY },
+    private val invokeReadDemand: (DbDemandIdRequest) -> DbDemandResponse = { DbDemandResponse.MOCK_SUCCESS_EMPTY },
+    private val invokeUpdateDemand: (DbDemandRequest) -> DbDemandResponse = { DbDemandResponse.MOCK_SUCCESS_EMPTY },
+    private val invokeDeleteDemand: (DbDemandIdRequest) -> DbDemandResponse = { DbDemandResponse.MOCK_SUCCESS_EMPTY },
+    private val invokeSearchDemand: (DbDemandFilterRequest) -> DbDemandsResponse = { DbDemandsResponse.MOCK_SUCCESS_EMPTY },
 ) : IDemandRepository {
     override suspend fun createDemand(rq: DbDemandRequest): DbDemandResponse {
-        return invokeCreateAd(rq)
+        return invokeCreateDemand(rq)
     }
 
     override suspend fun readDemand(rq: DbDemandIdRequest): DbDemandResponse {
-        return invokeReadAd(rq)
+        return invokeReadDemand(rq)
     }
 
     override suspend fun updateDemand(rq: DbDemandRequest): DbDemandResponse {
-        return invokeUpdateAd(rq)
+        return invokeUpdateDemand(rq)
     }
 
     override suspend fun deleteDemand(rq: DbDemandIdRequest): DbDemandResponse {
-        return invokeDeleteAd(rq)
+        return invokeDeleteDemand(rq)
     }
 
     override suspend fun searchDemand(rq: DbDemandFilterRequest): DbDemandsResponse {
-        return invokeSearchAd(rq)
+        return invokeSearchDemand(rq)
     }
 }
