@@ -8,7 +8,14 @@ import kotlinx.datetime.plus
 import now
 import ru.otus.otuskotlin.desksharing.biz.DemandProcessor
 import ru.otus.otuskotlin.desksharing.common.DemandContext
-import ru.otus.otuskotlin.desksharing.common.model.*
+import ru.otus.otuskotlin.desksharing.common.model.DemandCommand
+import ru.otus.otuskotlin.desksharing.common.model.DemandDto
+import ru.otus.otuskotlin.desksharing.common.model.DemandState
+import ru.otus.otuskotlin.desksharing.common.model.DemandStatus
+import ru.otus.otuskotlin.desksharing.common.model.DemandUserId
+import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
+import ru.otus.otuskotlin.desksharing.common.model.DskShrngWorkMode
+import ru.otus.otuskotlin.desksharing.common.model.WorkDeskNumber
 import kotlin.test.assertContains
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
@@ -27,7 +34,8 @@ fun validationIdCorrect(command: DemandCommand, processor: DemandProcessor) = ru
             demandId = DskShrngId("123-234-abc-ABC"),
             workDeskNumber = WorkDeskNumber.NONE,
             number = "",
-            userId = DemandUserId("123-234-abc-ABC")
+            userId = DemandUserId("123-234-abc-ABC"),
+            lock = "123-234-abc-ABC"
         ),
     )
     processor.exec(ctx)
@@ -49,7 +57,8 @@ fun validationIdEmpty(command: DemandCommand, processor: DemandProcessor) = runT
             demandId = DskShrngId(""),
             workDeskNumber = WorkDeskNumber.NONE,
             number = "",
-            userId = DemandUserId("123-234-abc-ABC")
+            userId = DemandUserId("123-234-abc-ABC"),
+            lock = "123-234-abc-ABC"
         ),
     )
     processor.exec(ctx)
@@ -74,7 +83,8 @@ fun validationIdFormat(command: DemandCommand, processor: DemandProcessor) = run
             demandId = DskShrngId("\"!@#\\\$%^&*(),.{}\""),
             workDeskNumber = WorkDeskNumber.NONE,
             number = "",
-            userId = DemandUserId("123-234-abc-ABC")
+            userId = DemandUserId("123-234-abc-ABC"),
+            lock = "123-234-abc-ABC"
         ),
     )
 
@@ -100,7 +110,8 @@ fun validationEmployeeIdCorrect(command: DemandCommand, processor: DemandProcess
             demandId = DskShrngId("123-234-abc-ABC"),
             workDeskNumber = WorkDeskNumber.NONE,
             number = "",
-            userId = DemandUserId("123-234-abc-ABC")
+            userId = DemandUserId("123-234-abc-ABC"),
+            lock = "123-234-abc-ABC"
         ),
     )
     processor.exec(ctx)
@@ -122,7 +133,8 @@ fun validationEmployeeIdEmpty(command: DemandCommand, processor: DemandProcessor
             demandId = DskShrngId("123-234-abc-ABC"),
             workDeskNumber = WorkDeskNumber.NONE,
             number = "",
-            userId = DemandUserId("123-234-abc-ABC")
+            userId = DemandUserId("123-234-abc-ABC"),
+            lock = "123-234-abc-ABC"
         ),
     )
     processor.exec(ctx)
@@ -147,7 +159,8 @@ fun validationEmployeeIdFormat(command: DemandCommand, processor: DemandProcesso
             demandId = DskShrngId("123-234-abc-ABC"),
             workDeskNumber = WorkDeskNumber.NONE,
             number = "",
-            userId = DemandUserId("123-234-abc-ABC")
+            userId = DemandUserId("123-234-abc-ABC"),
+            lock = "123-234-abc-ABC"
         ),
     )
 
@@ -173,7 +186,8 @@ fun validationUserIdCorrect(command: DemandCommand, processor: DemandProcessor) 
             demandId = DskShrngId("123-234-abc-ABC"),
             workDeskNumber = WorkDeskNumber.NONE,
             number = "",
-            userId = DemandUserId("123-234-abc-ABC")
+            userId = DemandUserId("123-234-abc-ABC"),
+            lock = "123-234-abc-ABC"
         ),
     )
     processor.exec(ctx)
@@ -195,7 +209,8 @@ fun validationUserIdEmpty(command: DemandCommand, processor: DemandProcessor) = 
             demandId = DskShrngId("123-234-abc-ABC"),
             workDeskNumber = WorkDeskNumber.NONE,
             number = "",
-            userId = DemandUserId("")
+            userId = DemandUserId(""),
+            lock = "123-234-abc-ABC"
         ),
     )
     processor.exec(ctx)
@@ -220,7 +235,8 @@ fun validationUserIdFormat(command: DemandCommand, processor: DemandProcessor) =
             demandId = DskShrngId("123-234-abc-ABC"),
             workDeskNumber = WorkDeskNumber.NONE,
             number = "",
-            userId = DemandUserId("\"!@#\\\$%^&*(),.{}\"")
+            userId = DemandUserId("\"!@#\\\$%^&*(),.{}\""),
+            lock = "123-234-abc-ABC"
         ),
     )
 
