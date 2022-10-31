@@ -80,7 +80,7 @@ class BizRepoUpdateTest {
             number = "1",
             userId = DemandUserId("123"),
             demandId = DskShrngId("123"),
-            workDeskNumber = WorkDeskNumber("1"),
+            workDeskNumber = WorkDeskNumber("2"),
             lock = uuidOld
         )
         val ctx = DemandContext(

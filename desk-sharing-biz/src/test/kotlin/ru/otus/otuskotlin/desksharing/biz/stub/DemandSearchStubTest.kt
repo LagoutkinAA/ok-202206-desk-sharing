@@ -2,7 +2,9 @@ package ru.otus.otuskotlin.desksharing.biz.stub
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.plus
 import now
 import ru.otus.otuskotlin.desksharing.biz.DemandProcessor
 import ru.otus.otuskotlin.desksharing.common.DemandContext
@@ -28,7 +30,7 @@ class DemandSearchStubTest {
     val employeeId = DskShrngId("e777")
     val userId = DemandUserId("u777")
     val date = LocalDate.now()
-    val bookingDate = LocalDate.now()
+    val bookingDate = LocalDate.now().plus(1, DateTimeUnit.DAY)
     val workDeskNumber = WorkDeskNumber("1/1")
     val number = "1"
     val filter = DemandFilter(employeeId = employeeId, dateFrom = LocalDate.now(), dateTo = LocalDate.now())

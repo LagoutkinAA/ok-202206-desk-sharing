@@ -1,5 +1,6 @@
 package ru.otus.otuskotlin.desksharing.biz
 
+import ru.otus.otuskotlin.desksharing.biz.general.initRepo
 import ru.otus.otuskotlin.desksharing.biz.general.operation
 import ru.otus.otuskotlin.desksharing.biz.general.prepareResult
 import ru.otus.otuskotlin.desksharing.biz.repo.demandAssignNumber
@@ -48,6 +49,7 @@ class DemandProcessor(private val settings: DemandSettings = DemandSettings()) {
         @Suppress("DuplicatedCode")
         private val BusinessChain = rootChain<DemandContext> {
             initStatus("Инициализация статуса")
+            initRepo("Инициализация репозитория")
 
             operation("Создание заявки", DemandCommand.CREATE) {
                 stubs("Обработка стабов") {

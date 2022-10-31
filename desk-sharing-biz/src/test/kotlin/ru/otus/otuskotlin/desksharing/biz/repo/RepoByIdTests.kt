@@ -2,7 +2,9 @@ package ru.otus.otuskotlin.desksharing.biz.repo
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.plus
 import now
 import ru.otus.otuskotlin.desksharing.biz.DemandProcessor
 import ru.otus.otuskotlin.desksharing.common.DemandContext
@@ -22,7 +24,7 @@ import kotlin.test.assertEquals
 
 private val initDemand = DemandDto(
     date = LocalDate.now(),
-    bookingDate = LocalDate.now(),
+    bookingDate = LocalDate.now().plus(1, DateTimeUnit.DAY),
     employeeId = DskShrngId("123"),
     status = DemandStatus.NONE,
     number = "",
@@ -59,7 +61,7 @@ fun repoNotFoundTest(command: DemandCommand) = runTest {
         workMode = DskShrngWorkMode.TEST,
         demandRequest = DemandDto(
             date = LocalDate.now(),
-            bookingDate = LocalDate.now(),
+            bookingDate = LocalDate.now().plus(1, DateTimeUnit.DAY),
             employeeId = DskShrngId("123"),
             status = DemandStatus.NONE,
             number = "",

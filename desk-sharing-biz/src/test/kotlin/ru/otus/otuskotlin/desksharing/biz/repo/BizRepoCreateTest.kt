@@ -2,6 +2,7 @@ package ru.otus.otuskotlin.desksharing.biz.repo
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.DateTimeUnit.Companion.DAY
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.plus
@@ -16,7 +17,9 @@ import ru.otus.otuskotlin.desksharing.common.model.DemandStatus
 import ru.otus.otuskotlin.desksharing.common.model.DemandUserId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngWorkMode
+import ru.otus.otuskotlin.desksharing.common.model.WorkDeskNumber
 import ru.otus.otuskotlin.desksharing.common.repository.DbDemandResponse
+import ru.otus.otuskotlin.desksharing.common.repository.DbDemandsResponse
 import ru.otus.otuskotlin.desksharing.repository.tests.DemandRepositoryMock
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -26,6 +29,19 @@ class BizRepoCreateTest {
 
     private val command = DemandCommand.CREATE
     private val uuid = "10000000-0000-0000-0000-000000000001"
+
+    private val initDemand = DemandDto(
+        date = LocalDate.now(),
+        bookingDate = LocalDate.now().plus(1, DateTimeUnit.DAY),
+        employeeId = DskShrngId("123"),
+        status = DemandStatus.ACCEPTED,
+        number = "1",
+        userId = DemandUserId("123"),
+        demandId = DskShrngId("123"),
+        workDeskNumber = WorkDeskNumber("1"),
+        lock = uuid
+    )
+
     private val repo = DemandRepositoryMock(
         invokeCreateDemand = {
             DbDemandResponse(
@@ -38,6 +54,24 @@ class BizRepoCreateTest {
                     number = it.demand.number,
                     demandId = DskShrngId(uuid)
                 )
+            )
+        },
+        invokeReadDemand = {
+            DbDemandResponse(
+                isSuccess = true,
+                data = initDemand,
+            )
+        },
+        invokeUpdateDemand = {
+            DbDemandResponse(
+                isSuccess = true,
+                data = initDemand
+            )
+        },
+        invokeSearchDemand = {
+            DbDemandsResponse(
+                isSuccess = true,
+                data = listOf(initDemand),
             )
         }
     )

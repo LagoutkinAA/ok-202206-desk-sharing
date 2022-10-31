@@ -1,7 +1,9 @@
 package ru.otus.otuskotlin.desksharing.repository.tests
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.plus
 import now
 import org.junit.Test
 import ru.otus.otuskotlin.desksharing.common.model.DemandDto
@@ -24,7 +26,7 @@ abstract class RepoDemandCreateTest {
 
     protected val createObj = DemandDto(
         date = LocalDate.now(),
-        bookingDate = LocalDate.now(),
+        bookingDate = LocalDate.now().plus(1, DateTimeUnit.DAY),
         employeeId = DskShrngId("e777"),
         status = DemandStatus.ACCEPTED,
         demandId = DskShrngId("create-001"),
