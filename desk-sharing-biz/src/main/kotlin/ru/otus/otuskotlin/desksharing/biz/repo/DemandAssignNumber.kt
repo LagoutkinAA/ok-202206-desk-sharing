@@ -5,6 +5,7 @@ import ru.otus.otuskotlin.desksharing.common.model.DemandState
 import ru.otus.otuskotlin.desksharing.common.model.DemandStatus
 import ru.otus.otuskotlin.desksharing.common.model.WorkDeskNumber
 import ru.otus.otuskotlin.desksharing.common.repository.DbDemandFilterRequest
+import ru.otus.otuskotlin.desksharing.common.repository.DbDemandRequest
 import ru.otus.otuskotlin.desksharing.cor.ICorChainDsl
 import ru.otus.otuskotlin.desksharing.cor.worker
 import java.util.stream.Collectors
@@ -16,13 +17,13 @@ fun ICorChainDsl<DemandContext>.demandAssignNumber(title: String) = worker {
     on { state == DemandState.RUNNING }
     handle {
         val demand = demandRepoDone.deepCopy()
-        val request = DbDemandFilterRequest(
+        val searchRequest = DbDemandFilterRequest(
             dateFrom = demand.bookingDate,
             dateTo = demand.bookingDate,
         )
-        val result = demandRepo.searchDemand(request)
-        val resultDemands = result.data
-        if (result.isSuccess && resultDemands != null) {
+        val searchResult = demandRepo.searchDemand(searchRequest)
+        val resultDemands = searchResult.data
+        if (searchResult.isSuccess && resultDemands != null) {
             val numbers = resultDemands.stream()
                 .filter {
                     (it.status == DemandStatus.ACCEPTED || it.status == DemandStatus.CONFIRMED)
@@ -48,10 +49,21 @@ fun ICorChainDsl<DemandContext>.demandAssignNumber(title: String) = worker {
                     demand.status = DemandStatus.ACCEPTED
                 }
             }
-            demandRepoPrepare = demand
+            val updateRequest = DbDemandRequest(
+                demand.deepCopy()
+            )
+            val updateResult = demandRepo.updateDemand(updateRequest)
+            val resultDemand = updateResult.data
+            if (updateResult.isSuccess && resultDemand != null) {
+                demandRepoDone = resultDemand
+            } else {
+                state = DemandState.FAILING
+                errors.addAll(updateResult.errors)
+                demandRepoDone
+            }
         } else {
             state = DemandState.FAILING
-            errors.addAll(result.errors)
+            errors.addAll(searchResult.errors)
         }
     }
 }

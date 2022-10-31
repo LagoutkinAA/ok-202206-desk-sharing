@@ -77,8 +77,7 @@ class DemandProcessor(private val settings: DemandSettings = DemandSettings()) {
                     title = "Логика сохранения"
                     repoPrepareCreate("Подготовка объекта для сохранения")
                     repoCreate("Создание объявления в БД")
-                    demandAssignNumber("Поиск свободного рабочего места")
-                    repoUpdate("Обновление номера рабочего места")
+                    demandAssignNumber("Поиск и назначение свободного рабочего места")
                 }
                 prepareResult("Подготовка ответа")
             }
