@@ -12,7 +12,7 @@ fun ICorChainDsl<DemandContext>.stubSearchSuccess(title: String) = worker {
     on { stubCase == DemandStubs.SUCCESS && state == DemandState.RUNNING }
     handle {
         state = DemandState.FINISHING
-        demandResponses.addAll(
+        demandsResponse.addAll(
             DeskSharingDemandStub.prepareSearchList(
                 demandFilterRequest.employeeId,
                 demandFilterRequest.dateFrom,

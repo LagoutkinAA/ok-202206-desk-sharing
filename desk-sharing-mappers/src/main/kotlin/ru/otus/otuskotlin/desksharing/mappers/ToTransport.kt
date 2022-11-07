@@ -1,7 +1,26 @@
 import kotlinx.datetime.LocalDate
-import ru.otus.otuskotlin.deskSharing.api.v1.models.*
+import ru.otus.otuskotlin.deskSharing.api.v1.models.DemandApiStatus
+import ru.otus.otuskotlin.deskSharing.api.v1.models.DemandCreateResponse
+import ru.otus.otuskotlin.deskSharing.api.v1.models.DemandDeleteResponse
+import ru.otus.otuskotlin.deskSharing.api.v1.models.DemandPermissions
+import ru.otus.otuskotlin.deskSharing.api.v1.models.DemandReadResponse
+import ru.otus.otuskotlin.deskSharing.api.v1.models.DemandResponseObjectDto
+import ru.otus.otuskotlin.deskSharing.api.v1.models.DemandSearchResponse
+import ru.otus.otuskotlin.deskSharing.api.v1.models.DemandUpdateResponse
+import ru.otus.otuskotlin.deskSharing.api.v1.models.Error
+import ru.otus.otuskotlin.deskSharing.api.v1.models.IResponse
+import ru.otus.otuskotlin.deskSharing.api.v1.models.ResponseResult
 import ru.otus.otuskotlin.desksharing.common.DemandContext
-import ru.otus.otuskotlin.desksharing.common.model.*
+import ru.otus.otuskotlin.desksharing.common.NONE
+import ru.otus.otuskotlin.desksharing.common.model.DemandCommand
+import ru.otus.otuskotlin.desksharing.common.model.DemandDto
+import ru.otus.otuskotlin.desksharing.common.model.DemandError
+import ru.otus.otuskotlin.desksharing.common.model.DemandPermissionClient
+import ru.otus.otuskotlin.desksharing.common.model.DemandState
+import ru.otus.otuskotlin.desksharing.common.model.DemandStatus
+import ru.otus.otuskotlin.desksharing.common.model.DemandUserId
+import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
+import ru.otus.otuskotlin.desksharing.common.model.WorkDeskNumber
 import ru.otus.otuskotlin.desksharing.mappers.exceptions.UnknownDemandCommand
 
 fun DemandContext.toTransportDemand(): IResponse = when (val cmd = command) {
@@ -45,7 +64,7 @@ fun DemandContext.toTransportSearch() = DemandSearchResponse(
     requestId = this.requestId.asString().takeIf { it.isNotBlank() },
     result = if (state == DemandState.RUNNING) ResponseResult.SUCCESS else ResponseResult.ERROR,
     errors = errors.toTransportErrors(),
-    demands = demandResponses.toTransportDemand()
+    demands = demandsResponse.toTransportDemand()
 )
 
 fun List<DemandDto>.toTransportDemand(): List<DemandResponseObjectDto>? = this

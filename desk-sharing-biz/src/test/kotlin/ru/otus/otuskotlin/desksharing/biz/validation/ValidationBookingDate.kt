@@ -1,15 +1,22 @@
 package ru.otus.otuskotlin.desksharing.biz.validation
 
-import NONE
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.plus
-import now
 import ru.otus.otuskotlin.desksharing.biz.DemandProcessor
 import ru.otus.otuskotlin.desksharing.common.DemandContext
-import ru.otus.otuskotlin.desksharing.common.model.*
+import ru.otus.otuskotlin.desksharing.common.NONE
+import ru.otus.otuskotlin.desksharing.common.model.DemandCommand
+import ru.otus.otuskotlin.desksharing.common.model.DemandDto
+import ru.otus.otuskotlin.desksharing.common.model.DemandState
+import ru.otus.otuskotlin.desksharing.common.model.DemandStatus
+import ru.otus.otuskotlin.desksharing.common.model.DemandUserId
+import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
+import ru.otus.otuskotlin.desksharing.common.model.DskShrngWorkMode
+import ru.otus.otuskotlin.desksharing.common.model.WorkDeskNumber
+import ru.otus.otuskotlin.desksharing.common.now
 import kotlin.test.assertContains
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
@@ -28,7 +35,8 @@ fun validationBookingDateCorrect(command: DemandCommand, processor: DemandProces
             demandId = DskShrngId("123-234-abc-ABC"),
             workDeskNumber = WorkDeskNumber.NONE,
             number = "",
-            userId = DemandUserId("123-234-abc-ABC")
+            userId = DemandUserId("123-234-abc-ABC"),
+            lock = "123-234-abc-ABC"
         ),
     )
     processor.exec(ctx)
@@ -50,7 +58,8 @@ fun validationBookingDateEmpty(command: DemandCommand, processor: DemandProcesso
             demandId = DskShrngId("123-234-abc-ABC"),
             workDeskNumber = WorkDeskNumber.NONE,
             number = "",
-            userId = DemandUserId("123-234-abc-ABC")
+            userId = DemandUserId("123-234-abc-ABC"),
+            lock = "123-234-abc-ABC"
         ),
     )
     processor.exec(ctx)
@@ -75,7 +84,8 @@ fun validationBookingDateNotInRange(command: DemandCommand, processor: DemandPro
             demandId = DskShrngId("123-234-abc-ABC"),
             workDeskNumber = WorkDeskNumber.NONE,
             number = "",
-            userId = DemandUserId("123-234-abc-ABC")
+            userId = DemandUserId("123-234-abc-ABC"),
+            lock = "123-234-abc-ABC"
         ),
     )
 

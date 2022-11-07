@@ -1,7 +1,7 @@
 package ru.otus.otuskotlin.desksharing.validation.validators
 
-import NONE
 import kotlinx.datetime.LocalDate
+import ru.otus.otuskotlin.desksharing.common.NONE
 import ru.otus.otuskotlin.desksharing.validation.IValidator
 import ru.otus.otuskotlin.desksharing.validation.ValidationFieldError
 import ru.otus.otuskotlin.desksharing.validation.ValidationResult
