@@ -1,6 +1,5 @@
 package ru.otus.otuskotlin.desksharing.common
 
-import NONE
 import kotlinx.datetime.Instant
 import ru.otus.otuskotlin.desksharing.common.model.DemandCommand
 import ru.otus.otuskotlin.desksharing.common.model.DemandDto

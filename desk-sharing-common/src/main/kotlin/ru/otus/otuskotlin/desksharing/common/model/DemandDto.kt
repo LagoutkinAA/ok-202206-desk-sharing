@@ -1,7 +1,7 @@
 package ru.otus.otuskotlin.desksharing.common.model
 
-import NONE
 import kotlinx.datetime.LocalDate
+import ru.otus.otuskotlin.desksharing.common.NONE
 
 data class DemandDto (
 

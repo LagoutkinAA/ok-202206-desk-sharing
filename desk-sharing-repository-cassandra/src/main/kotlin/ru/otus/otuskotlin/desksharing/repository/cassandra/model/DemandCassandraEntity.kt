@@ -5,13 +5,13 @@ import com.datastax.oss.driver.api.mapper.annotations.CqlName
 import com.datastax.oss.driver.api.mapper.annotations.Entity
 import com.datastax.oss.driver.api.mapper.annotations.PartitionKey
 import com.datastax.oss.driver.api.querybuilder.SchemaBuilder
-import fromJavaLocalDate
+import ru.otus.otuskotlin.desksharing.common.fromJavaLocalDate
 import ru.otus.otuskotlin.desksharing.common.model.DemandDto
 import ru.otus.otuskotlin.desksharing.common.model.DemandStatus
 import ru.otus.otuskotlin.desksharing.common.model.DemandUserId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
 import ru.otus.otuskotlin.desksharing.common.model.WorkDeskNumber
-import toJavaLocalDate
+import ru.otus.otuskotlin.desksharing.common.toJavaLocalDate
 import java.time.LocalDate
 
 @Entity

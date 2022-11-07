@@ -4,13 +4,13 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.plus
-import now
 import org.junit.Test
 import ru.otus.otuskotlin.desksharing.common.model.DemandDto
 import ru.otus.otuskotlin.desksharing.common.model.DemandStatus
 import ru.otus.otuskotlin.desksharing.common.model.DemandUserId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
 import ru.otus.otuskotlin.desksharing.common.model.WorkDeskNumber
+import ru.otus.otuskotlin.desksharing.common.now
 import ru.otus.otuskotlin.desksharing.common.repository.DbDemandRequest
 import ru.otus.otuskotlin.desksharing.common.repository.IDemandRepository
 import ru.otus.otuskotlin.marketplace.backend.repo.tests.runRepoTest

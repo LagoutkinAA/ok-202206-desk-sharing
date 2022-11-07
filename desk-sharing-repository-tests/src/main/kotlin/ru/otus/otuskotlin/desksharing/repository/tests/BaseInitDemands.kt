@@ -1,12 +1,12 @@
 package ru.otus.otuskotlin.desksharing.repository.tests
 
 import kotlinx.datetime.LocalDate
-import now
 import ru.otus.otuskotlin.desksharing.common.model.DemandDto
 import ru.otus.otuskotlin.desksharing.common.model.DemandStatus
 import ru.otus.otuskotlin.desksharing.common.model.DemandUserId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
 import ru.otus.otuskotlin.desksharing.common.model.WorkDeskNumber
+import ru.otus.otuskotlin.desksharing.common.now
 
 abstract class BaseInitDemands(val operation: String) : IInitObjects<DemandDto> {
 

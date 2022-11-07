@@ -11,6 +11,7 @@ import ru.otus.otuskotlin.deskSharing.api.v1.models.Error
 import ru.otus.otuskotlin.deskSharing.api.v1.models.IResponse
 import ru.otus.otuskotlin.deskSharing.api.v1.models.ResponseResult
 import ru.otus.otuskotlin.desksharing.common.DemandContext
+import ru.otus.otuskotlin.desksharing.common.NONE
 import ru.otus.otuskotlin.desksharing.common.model.DemandCommand
 import ru.otus.otuskotlin.desksharing.common.model.DemandDto
 import ru.otus.otuskotlin.desksharing.common.model.DemandError

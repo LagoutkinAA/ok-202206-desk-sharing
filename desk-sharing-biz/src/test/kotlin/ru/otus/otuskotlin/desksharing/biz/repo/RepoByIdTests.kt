@@ -5,7 +5,6 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.plus
-import now
 import ru.otus.otuskotlin.desksharing.biz.DemandProcessor
 import ru.otus.otuskotlin.desksharing.common.DemandContext
 import ru.otus.otuskotlin.desksharing.common.model.DemandCommand
@@ -17,6 +16,7 @@ import ru.otus.otuskotlin.desksharing.common.model.DemandStatus
 import ru.otus.otuskotlin.desksharing.common.model.DemandUserId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngWorkMode
+import ru.otus.otuskotlin.desksharing.common.now
 import ru.otus.otuskotlin.desksharing.common.repository.DbDemandResponse
 import ru.otus.otuskotlin.desksharing.common.repository.IDemandRepository
 import ru.otus.otuskotlin.desksharing.repository.tests.DemandRepositoryMock

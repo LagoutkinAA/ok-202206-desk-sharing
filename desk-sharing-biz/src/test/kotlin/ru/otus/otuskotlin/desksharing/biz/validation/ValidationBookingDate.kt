@@ -1,14 +1,13 @@
 package ru.otus.otuskotlin.desksharing.biz.validation
 
-import NONE
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.plus
-import now
 import ru.otus.otuskotlin.desksharing.biz.DemandProcessor
 import ru.otus.otuskotlin.desksharing.common.DemandContext
+import ru.otus.otuskotlin.desksharing.common.NONE
 import ru.otus.otuskotlin.desksharing.common.model.DemandCommand
 import ru.otus.otuskotlin.desksharing.common.model.DemandDto
 import ru.otus.otuskotlin.desksharing.common.model.DemandState
@@ -17,6 +16,7 @@ import ru.otus.otuskotlin.desksharing.common.model.DemandUserId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngWorkMode
 import ru.otus.otuskotlin.desksharing.common.model.WorkDeskNumber
+import ru.otus.otuskotlin.desksharing.common.now
 import kotlin.test.assertContains
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals

@@ -1,11 +1,11 @@
 package ru.otus.otuskotlin.desksharing.repository.cassandra
 
-import NONE
 import com.datastax.oss.driver.api.core.cql.AsyncResultSet
 import com.datastax.oss.driver.api.mapper.MapperContext
 import com.datastax.oss.driver.api.mapper.entity.EntityHelper
 import com.datastax.oss.driver.api.querybuilder.QueryBuilder
 import kotlinx.datetime.LocalDate
+import ru.otus.otuskotlin.desksharing.common.NONE
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
 import ru.otus.otuskotlin.desksharing.common.repository.DbDemandFilterRequest
 import ru.otus.otuskotlin.desksharing.repository.cassandra.model.DemandCassandraEntity

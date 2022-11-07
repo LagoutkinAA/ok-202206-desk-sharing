@@ -1,8 +1,8 @@
 package ru.otus.otuskotlin.desksharing.repository.stub
 
 import kotlinx.datetime.LocalDate
-import now
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
+import ru.otus.otuskotlin.desksharing.common.now
 import ru.otus.otuskotlin.desksharing.common.repository.DbDemandFilterRequest
 import ru.otus.otuskotlin.desksharing.common.repository.DbDemandIdRequest
 import ru.otus.otuskotlin.desksharing.common.repository.DbDemandRequest

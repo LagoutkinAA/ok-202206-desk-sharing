@@ -1,12 +1,12 @@
 package ru.otus.otuskotlin.desksharing.repository.inmemory
 
-import MAX
-import NONE
 import com.benasher44.uuid.uuid4
 import io.github.reactivecircus.cache4k.Cache
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.datetime.LocalDate
+import ru.otus.otuskotlin.desksharing.common.MAX
+import ru.otus.otuskotlin.desksharing.common.NONE
 import ru.otus.otuskotlin.desksharing.common.helpers.errorRepoConcurrency
 import ru.otus.otuskotlin.desksharing.common.model.DemandDto
 import ru.otus.otuskotlin.desksharing.common.model.DemandError

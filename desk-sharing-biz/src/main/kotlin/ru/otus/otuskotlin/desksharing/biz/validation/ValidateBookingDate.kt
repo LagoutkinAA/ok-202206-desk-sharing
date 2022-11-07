@@ -1,10 +1,10 @@
 package ru.otus.otuskotlin.desksharing.biz.validation
 
-import NONE
 import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.plus
 import ru.otus.otuskotlin.desksharing.common.DemandContext
+import ru.otus.otuskotlin.desksharing.common.NONE
 import ru.otus.otuskotlin.desksharing.common.helpers.errorValidation
 import ru.otus.otuskotlin.desksharing.common.helpers.fail
 import ru.otus.otuskotlin.desksharing.cor.ICorChainDsl

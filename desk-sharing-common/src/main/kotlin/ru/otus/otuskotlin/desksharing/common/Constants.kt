@@ -1,3 +1,5 @@
+package ru.otus.otuskotlin.desksharing.common
+
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 

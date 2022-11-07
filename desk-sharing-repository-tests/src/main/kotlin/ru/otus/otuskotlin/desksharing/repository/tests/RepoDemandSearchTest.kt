@@ -2,9 +2,9 @@ package ru.otus.otuskotlin.desksharing.repository.tests
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.datetime.LocalDate
-import now
 import ru.otus.otuskotlin.desksharing.common.model.DemandDto
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
+import ru.otus.otuskotlin.desksharing.common.now
 import ru.otus.otuskotlin.desksharing.common.repository.DbDemandFilterRequest
 import ru.otus.otuskotlin.desksharing.common.repository.IDemandRepository
 import ru.otus.otuskotlin.marketplace.backend.repo.tests.runRepoTest

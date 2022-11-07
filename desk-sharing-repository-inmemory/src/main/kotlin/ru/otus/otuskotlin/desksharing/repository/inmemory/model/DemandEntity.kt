@@ -1,7 +1,7 @@
 package ru.otus.otuskotlin.desksharing.repository.inmemory.model
 
-import NONE
 import kotlinx.datetime.LocalDate
+import ru.otus.otuskotlin.desksharing.common.NONE
 import ru.otus.otuskotlin.desksharing.common.model.DemandDto
 import ru.otus.otuskotlin.desksharing.common.model.DemandStatus
 import ru.otus.otuskotlin.desksharing.common.model.DemandUserId

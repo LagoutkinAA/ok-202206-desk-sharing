@@ -1,13 +1,13 @@
 package ru.otus.otuskotlin.desksharing.validation
 
-import NONE
 import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.plus
-import now
 import org.junit.Test
+import ru.otus.otuskotlin.desksharing.common.NONE
 import ru.otus.otuskotlin.desksharing.common.model.DemandUserId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
+import ru.otus.otuskotlin.desksharing.common.now
 import ru.otus.otuskotlin.desksharing.validation.validators.ValidatorDateNotEmpty
 import ru.otus.otuskotlin.desksharing.validation.validators.ValidatorIdNotEmpty
 import ru.otus.otuskotlin.desksharing.validation.validators.ValidatorInRange
