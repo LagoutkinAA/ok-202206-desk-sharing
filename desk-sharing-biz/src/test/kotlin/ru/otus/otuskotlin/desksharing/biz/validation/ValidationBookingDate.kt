@@ -17,6 +17,8 @@ import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngWorkMode
 import ru.otus.otuskotlin.desksharing.common.model.WorkDeskNumber
 import ru.otus.otuskotlin.desksharing.common.now
+import ru.otus.otuskotlin.desksharing.common.permission.DemandPrincipalModel
+import ru.otus.otuskotlin.desksharing.common.permission.DemandUserGroups
 import kotlin.test.assertContains
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
@@ -38,6 +40,13 @@ fun validationBookingDateCorrect(command: DemandCommand, processor: DemandProces
             userId = DemandUserId("123-234-abc-ABC"),
             lock = "123-234-abc-ABC"
         ),
+        principal = DemandPrincipalModel(
+            id = DemandUserId("123-234-abc-ABC"),
+            groups = setOf(
+                DemandUserGroups.USER,
+                DemandUserGroups.TEST,
+            )
+        )
     )
     processor.exec(ctx)
     assertEquals(0, ctx.errors.size)
@@ -61,6 +70,13 @@ fun validationBookingDateEmpty(command: DemandCommand, processor: DemandProcesso
             userId = DemandUserId("123-234-abc-ABC"),
             lock = "123-234-abc-ABC"
         ),
+        principal = DemandPrincipalModel(
+            id = DemandUserId("123-234-abc-ABC"),
+            groups = setOf(
+                DemandUserGroups.USER,
+                DemandUserGroups.TEST,
+            )
+        )
     )
     processor.exec(ctx)
     assertEquals(2, ctx.errors.size)
@@ -87,6 +103,13 @@ fun validationBookingDateNotInRange(command: DemandCommand, processor: DemandPro
             userId = DemandUserId("123-234-abc-ABC"),
             lock = "123-234-abc-ABC"
         ),
+        principal = DemandPrincipalModel(
+            id = DemandUserId("123-234-abc-ABC"),
+            groups = setOf(
+                DemandUserGroups.USER,
+                DemandUserGroups.TEST,
+            )
+        )
     )
 
     processor.exec(ctx)

@@ -2,6 +2,7 @@ package ru.otus.otuskotlin.desksharing.stub
 
 import kotlinx.datetime.LocalDate
 import ru.otus.otuskotlin.desksharing.common.model.*
+import ru.otus.otuskotlin.desksharing.common.permission.DemandPermissionClient
 
 object DeskSharingDemand {
     val DEMAND: DemandDto

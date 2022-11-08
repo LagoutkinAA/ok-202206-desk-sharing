@@ -17,6 +17,8 @@ import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngWorkMode
 import ru.otus.otuskotlin.desksharing.common.model.WorkDeskNumber
 import ru.otus.otuskotlin.desksharing.common.now
+import ru.otus.otuskotlin.desksharing.common.permission.DemandPrincipalModel
+import ru.otus.otuskotlin.desksharing.common.permission.DemandUserGroups
 import ru.otus.otuskotlin.desksharing.common.repository.DbDemandResponse
 import ru.otus.otuskotlin.desksharing.repository.tests.DemandRepositoryMock
 import kotlin.test.Test
@@ -24,6 +26,7 @@ import kotlin.test.assertEquals
 
 class BizRepoReadTest {
 
+    private val userId = DemandUserId("321")
     private val command = DemandCommand.READ
     private val initDemand = DemandDto(
         date = LocalDate.now(),
@@ -31,19 +34,21 @@ class BizRepoReadTest {
         employeeId = DskShrngId("123"),
         status = DemandStatus.ACCEPTED,
         number = "1",
-        userId = DemandUserId("123"),
+        userId = userId,
         demandId = DskShrngId("123"),
         workDeskNumber = WorkDeskNumber("1")
     )
 
-    private val repo by lazy { DemandRepositoryMock(
-        invokeReadDemand = {
-            DbDemandResponse(
-                isSuccess = true,
-                data = initDemand,
-            )
-        }
-    ) }
+    private val repo by lazy {
+        DemandRepositoryMock(
+            invokeReadDemand = {
+                DbDemandResponse(
+                    isSuccess = true,
+                    data = initDemand,
+                )
+            }
+        )
+    }
     private val settings by lazy {
         DemandSettings(
             repoTest = repo
@@ -61,6 +66,13 @@ class BizRepoReadTest {
             demandRequest = DemandDto(
                 demandId = DskShrngId("123"),
             ),
+            principal = DemandPrincipalModel(
+                id = userId,
+                groups = setOf(
+                    DemandUserGroups.USER,
+                    DemandUserGroups.TEST,
+                )
+            )
         )
         processor.exec(ctx)
         assertEquals(DemandState.FINISHING, ctx.state)

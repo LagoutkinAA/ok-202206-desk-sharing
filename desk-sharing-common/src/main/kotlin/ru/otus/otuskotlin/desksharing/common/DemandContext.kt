@@ -9,6 +9,8 @@ import ru.otus.otuskotlin.desksharing.common.model.DemandRequestId
 import ru.otus.otuskotlin.desksharing.common.model.DemandSettings
 import ru.otus.otuskotlin.desksharing.common.model.DemandState
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngWorkMode
+import ru.otus.otuskotlin.desksharing.common.permission.DemandPrincipalModel
+import ru.otus.otuskotlin.desksharing.common.permission.DemandUserPermissions
 import ru.otus.otuskotlin.desksharing.common.repository.IDemandRepository
 import ru.otus.otuskotlin.desksharing.common.stubs.DemandStubs
 
@@ -21,6 +23,10 @@ data class DemandContext(
 
     var workMode: DskShrngWorkMode = DskShrngWorkMode.PROD,
     var stubCase: DemandStubs = DemandStubs.NONE,
+
+    var principal: DemandPrincipalModel = DemandPrincipalModel.NONE,
+    val permissionsChain: MutableSet<DemandUserPermissions> = mutableSetOf(),
+    var permitted: Boolean = false,
 
     var demandRepo: IDemandRepository = IDemandRepository.NONE,
 

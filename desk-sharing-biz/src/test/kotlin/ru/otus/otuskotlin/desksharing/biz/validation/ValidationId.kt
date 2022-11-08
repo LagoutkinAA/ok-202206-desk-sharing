@@ -16,6 +16,8 @@ import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngWorkMode
 import ru.otus.otuskotlin.desksharing.common.model.WorkDeskNumber
 import ru.otus.otuskotlin.desksharing.common.now
+import ru.otus.otuskotlin.desksharing.common.permission.DemandPrincipalModel
+import ru.otus.otuskotlin.desksharing.common.permission.DemandUserGroups
 import kotlin.test.assertContains
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
@@ -37,6 +39,13 @@ fun validationIdCorrect(command: DemandCommand, processor: DemandProcessor) = ru
             userId = DemandUserId("123-234-abc-ABC"),
             lock = "123-234-abc-ABC"
         ),
+        principal = DemandPrincipalModel(
+            id = DemandUserId("123-234-abc-ABC"),
+            groups = setOf(
+                DemandUserGroups.USER,
+                DemandUserGroups.TEST,
+            )
+        )
     )
     processor.exec(ctx)
     assertEquals(0, ctx.errors.size)
@@ -60,6 +69,13 @@ fun validationIdEmpty(command: DemandCommand, processor: DemandProcessor) = runT
             userId = DemandUserId("123-234-abc-ABC"),
             lock = "123-234-abc-ABC"
         ),
+        principal = DemandPrincipalModel(
+            id = DemandUserId("123-234-abc-ABC"),
+            groups = setOf(
+                DemandUserGroups.USER,
+                DemandUserGroups.TEST,
+            )
+        )
     )
     processor.exec(ctx)
     assertEquals(1, ctx.errors.size)
@@ -86,6 +102,13 @@ fun validationIdFormat(command: DemandCommand, processor: DemandProcessor) = run
             userId = DemandUserId("123-234-abc-ABC"),
             lock = "123-234-abc-ABC"
         ),
+        principal = DemandPrincipalModel(
+            id = DemandUserId("123-234-abc-ABC"),
+            groups = setOf(
+                DemandUserGroups.USER,
+                DemandUserGroups.TEST,
+            )
+        )
     )
 
     processor.exec(ctx)
@@ -113,6 +136,13 @@ fun validationEmployeeIdCorrect(command: DemandCommand, processor: DemandProcess
             userId = DemandUserId("123-234-abc-ABC"),
             lock = "123-234-abc-ABC"
         ),
+        principal = DemandPrincipalModel(
+            id = DemandUserId("123-234-abc-ABC"),
+            groups = setOf(
+                DemandUserGroups.USER,
+                DemandUserGroups.TEST,
+            )
+        )
     )
     processor.exec(ctx)
     assertEquals(0, ctx.errors.size)
@@ -136,6 +166,13 @@ fun validationEmployeeIdEmpty(command: DemandCommand, processor: DemandProcessor
             userId = DemandUserId("123-234-abc-ABC"),
             lock = "123-234-abc-ABC"
         ),
+        principal = DemandPrincipalModel(
+            id = DemandUserId("123-234-abc-ABC"),
+            groups = setOf(
+                DemandUserGroups.USER,
+                DemandUserGroups.TEST,
+            )
+        )
     )
     processor.exec(ctx)
     assertEquals(1, ctx.errors.size)
@@ -162,6 +199,13 @@ fun validationEmployeeIdFormat(command: DemandCommand, processor: DemandProcesso
             userId = DemandUserId("123-234-abc-ABC"),
             lock = "123-234-abc-ABC"
         ),
+        principal = DemandPrincipalModel(
+            id = DemandUserId("123-234-abc-ABC"),
+            groups = setOf(
+                DemandUserGroups.USER,
+                DemandUserGroups.TEST,
+            )
+        )
     )
 
     processor.exec(ctx)
@@ -189,6 +233,13 @@ fun validationUserIdCorrect(command: DemandCommand, processor: DemandProcessor) 
             userId = DemandUserId("123-234-abc-ABC"),
             lock = "123-234-abc-ABC"
         ),
+        principal = DemandPrincipalModel(
+            id = DemandUserId("123-234-abc-ABC"),
+            groups = setOf(
+                DemandUserGroups.USER,
+                DemandUserGroups.TEST,
+            )
+        )
     )
     processor.exec(ctx)
     assertEquals(0, ctx.errors.size)
@@ -212,6 +263,13 @@ fun validationUserIdEmpty(command: DemandCommand, processor: DemandProcessor) = 
             userId = DemandUserId(""),
             lock = "123-234-abc-ABC"
         ),
+        principal = DemandPrincipalModel(
+            id = DemandUserId("123-234-abc-ABC"),
+            groups = setOf(
+                DemandUserGroups.USER,
+                DemandUserGroups.TEST,
+            )
+        )
     )
     processor.exec(ctx)
     assertEquals(1, ctx.errors.size)
@@ -238,6 +296,13 @@ fun validationUserIdFormat(command: DemandCommand, processor: DemandProcessor) =
             userId = DemandUserId("\"!@#\\\$%^&*(),.{}\""),
             lock = "123-234-abc-ABC"
         ),
+        principal = DemandPrincipalModel(
+            id = DemandUserId("123-234-abc-ABC"),
+            groups = setOf(
+                DemandUserGroups.USER,
+                DemandUserGroups.TEST,
+            )
+        )
     )
 
     processor.exec(ctx)

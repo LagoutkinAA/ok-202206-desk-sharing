@@ -16,6 +16,8 @@ import ru.otus.otuskotlin.desksharing.common.model.DemandUserId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngWorkMode
 import ru.otus.otuskotlin.desksharing.common.now
+import ru.otus.otuskotlin.desksharing.common.permission.DemandPrincipalModel
+import ru.otus.otuskotlin.desksharing.common.permission.DemandUserGroups
 import ru.otus.otuskotlin.desksharing.common.repository.DbDemandResponse
 import ru.otus.otuskotlin.desksharing.repository.tests.DemandRepositoryMock
 import kotlin.test.Test
@@ -25,6 +27,7 @@ import kotlin.test.assertTrue
 @OptIn(ExperimentalCoroutinesApi::class)
 class BizRepoDeleteTest {
 
+    private val userId = DemandUserId("321")
     private val command = DemandCommand.DELETE
     private val uuidOld = "10000000-0000-0000-0000-000000000001"
     private val uuidNew = "10000000-0000-0000-0000-000000000002"
@@ -35,7 +38,7 @@ class BizRepoDeleteTest {
         employeeId = DskShrngId("123"),
         status = DemandStatus.NEW,
         number = "1",
-        userId = DemandUserId("123"),
+        userId = userId,
         demandId = DskShrngId("123"),
         lock = uuidOld
     )
@@ -76,6 +79,13 @@ class BizRepoDeleteTest {
             state = DemandState.NONE,
             workMode = DskShrngWorkMode.TEST,
             demandRequest = demandToUpdate,
+            principal = DemandPrincipalModel(
+                id = userId,
+                groups = setOf(
+                    DemandUserGroups.USER,
+                    DemandUserGroups.TEST,
+                )
+            )
         )
         processor.exec(ctx)
         assertEquals(DemandState.FINISHING, ctx.state)

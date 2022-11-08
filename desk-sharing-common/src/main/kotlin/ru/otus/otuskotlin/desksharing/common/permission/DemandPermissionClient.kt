@@ -1,4 +1,4 @@
-package ru.otus.otuskotlin.desksharing.common.model
+package ru.otus.otuskotlin.desksharing.common.permission
 
 enum class DemandPermissionClient {
     READ,

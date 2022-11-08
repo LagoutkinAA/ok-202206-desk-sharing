@@ -17,6 +17,8 @@ import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngWorkMode
 import ru.otus.otuskotlin.desksharing.common.model.WorkDeskNumber
 import ru.otus.otuskotlin.desksharing.common.now
+import ru.otus.otuskotlin.desksharing.common.permission.DemandPrincipalModel
+import ru.otus.otuskotlin.desksharing.common.permission.DemandUserGroups
 import ru.otus.otuskotlin.desksharing.common.repository.DbDemandResponse
 import ru.otus.otuskotlin.desksharing.repository.tests.DemandRepositoryMock
 import kotlin.test.Test
@@ -25,6 +27,7 @@ import kotlin.test.assertEquals
 @OptIn(ExperimentalCoroutinesApi::class)
 class BizRepoUpdateTest {
 
+    private val userId = DemandUserId("321")
     private val command = DemandCommand.UPDATE
     private val uuidOld = "10000000-0000-0000-0000-000000000001"
     private val uuidNew = "10000000-0000-0000-0000-000000000002"
@@ -35,34 +38,36 @@ class BizRepoUpdateTest {
         employeeId = DskShrngId("123"),
         status = DemandStatus.ACCEPTED,
         number = "1",
-        userId = DemandUserId("123"),
+        userId = userId,
         demandId = DskShrngId("123"),
         workDeskNumber = WorkDeskNumber("1"),
         lock = uuidOld
     )
-    private val repo by lazy { DemandRepositoryMock(
-        invokeReadDemand = {
-            DbDemandResponse(
-                isSuccess = true,
-                data = initDemand,
-            )
-        },
-        invokeUpdateDemand = {
-            DbDemandResponse(
-                isSuccess = true,
-                data = DemandDto(
-                    date = LocalDate.now(),
-                    bookingDate = LocalDate.now().plus(1, DateTimeUnit.DAY),
-                    employeeId = DskShrngId("123"),
-                    status = DemandStatus.ACCEPTED,
-                    number = "1",
-                    userId = DemandUserId("123"),
-                    demandId = DskShrngId("123"),
-                    workDeskNumber = WorkDeskNumber("2"),
+    private val repo by lazy {
+        DemandRepositoryMock(
+            invokeReadDemand = {
+                DbDemandResponse(
+                    isSuccess = true,
+                    data = initDemand,
                 )
-            )
-        }
-    ) }
+            },
+            invokeUpdateDemand = {
+                DbDemandResponse(
+                    isSuccess = true,
+                    data = DemandDto(
+                        date = LocalDate.now(),
+                        bookingDate = LocalDate.now().plus(1, DateTimeUnit.DAY),
+                        employeeId = DskShrngId("123"),
+                        status = DemandStatus.ACCEPTED,
+                        number = "1",
+                        userId = DemandUserId("123"),
+                        demandId = DskShrngId("123"),
+                        workDeskNumber = WorkDeskNumber("2"),
+                    )
+                )
+            }
+        )
+    }
     private val settings by lazy {
         DemandSettings(
             repoTest = repo
@@ -88,6 +93,13 @@ class BizRepoUpdateTest {
             state = DemandState.NONE,
             workMode = DskShrngWorkMode.TEST,
             demandRequest = demandToUpdate,
+            principal = DemandPrincipalModel(
+                id = userId,
+                groups = setOf(
+                    DemandUserGroups.USER,
+                    DemandUserGroups.TEST,
+                )
+            )
         )
         processor.exec(ctx)
         assertEquals(DemandState.FINISHING, ctx.state)

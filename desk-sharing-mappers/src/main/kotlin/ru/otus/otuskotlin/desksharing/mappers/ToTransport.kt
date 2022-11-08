@@ -15,12 +15,12 @@ import ru.otus.otuskotlin.desksharing.common.NONE
 import ru.otus.otuskotlin.desksharing.common.model.DemandCommand
 import ru.otus.otuskotlin.desksharing.common.model.DemandDto
 import ru.otus.otuskotlin.desksharing.common.model.DemandError
-import ru.otus.otuskotlin.desksharing.common.model.DemandPermissionClient
 import ru.otus.otuskotlin.desksharing.common.model.DemandState
 import ru.otus.otuskotlin.desksharing.common.model.DemandStatus
 import ru.otus.otuskotlin.desksharing.common.model.DemandUserId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
 import ru.otus.otuskotlin.desksharing.common.model.WorkDeskNumber
+import ru.otus.otuskotlin.desksharing.common.permission.DemandPermissionClient
 import ru.otus.otuskotlin.desksharing.mappers.exceptions.UnknownDemandCommand
 
 fun DemandContext.toTransportDemand(): IResponse = when (val cmd = command) {

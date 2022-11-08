@@ -3,6 +3,10 @@ package ru.otus.otuskotlin.desksharing.biz
 import ru.otus.otuskotlin.desksharing.biz.general.initRepo
 import ru.otus.otuskotlin.desksharing.biz.general.operation
 import ru.otus.otuskotlin.desksharing.biz.general.prepareResult
+import ru.otus.otuskotlin.desksharing.biz.permissions.accessValidation
+import ru.otus.otuskotlin.desksharing.biz.permissions.chainPermissions
+import ru.otus.otuskotlin.desksharing.biz.permissions.frontPermissions
+import ru.otus.otuskotlin.desksharing.biz.permissions.searchTypes
 import ru.otus.otuskotlin.desksharing.biz.repo.demandAssignNumber
 import ru.otus.otuskotlin.desksharing.biz.repo.repoCreate
 import ru.otus.otuskotlin.desksharing.biz.repo.repoDelete
@@ -38,6 +42,7 @@ import ru.otus.otuskotlin.desksharing.common.DemandContext
 import ru.otus.otuskotlin.desksharing.common.model.DemandCommand
 import ru.otus.otuskotlin.desksharing.common.model.DemandSettings
 import ru.otus.otuskotlin.desksharing.common.model.DemandState
+import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
 import ru.otus.otuskotlin.desksharing.cor.chain
 import ru.otus.otuskotlin.desksharing.cor.rootChain
 import ru.otus.otuskotlin.desksharing.cor.worker
@@ -64,6 +69,7 @@ class DemandProcessor(private val settings: DemandSettings = DemandSettings()) {
                     worker("Копируем поля в demandRequestValidating") {
                         demandRequestValidating = demandRequest.deepCopy()
                     }
+                    worker("Очистка id") { demandRequestValidating.demandId = DskShrngId.NONE }
                     validateBookingDateNotEmpty("Проверка что дата бронирования не пустая")
                     validateBookingDateInRange("Проверка что дата бронирования попадает в диапазон")
                     validateEmployeeIdNotEmpty("Проверка что id сотрудника не пустой")
@@ -73,12 +79,15 @@ class DemandProcessor(private val settings: DemandSettings = DemandSettings()) {
 
                     finishDemandValidation("Завершение проверок")
                 }
+                chainPermissions("Вычисление разрешений для пользователя")
                 chain {
                     title = "Логика сохранения"
                     repoPrepareCreate("Подготовка объекта для сохранения")
+                    accessValidation("Вычисление прав доступа")
                     repoCreate("Создание объявления в БД")
                     demandAssignNumber("Поиск и назначение свободного рабочего места")
                 }
+                frontPermissions("Вычисление пользовательских разрешений для фронтенда")
                 prepareResult("Подготовка ответа")
             }
             operation("Получить заявку", DemandCommand.READ) {
@@ -97,15 +106,18 @@ class DemandProcessor(private val settings: DemandSettings = DemandSettings()) {
 
                     finishDemandValidation("Завершение проверок")
                 }
+                chainPermissions("Вычисление разрешений для пользователя")
                 chain {
                     title = "Логика чтения"
                     repoRead("Чтение заявки из БД")
+                    accessValidation("Вычисление прав доступа")
                     worker {
                         title = "Подготовка ответа для Read"
                         on { state == DemandState.RUNNING }
                         handle { demandRepoDone = demandRepoRead }
                     }
                 }
+                frontPermissions("Вычисление пользовательских разрешений для фронтенда")
                 prepareResult("Подготовка ответа")
             }
             operation("Изменить заявку", DemandCommand.UPDATE) {
@@ -131,12 +143,15 @@ class DemandProcessor(private val settings: DemandSettings = DemandSettings()) {
 
                     finishDemandValidation("Завершение проверок")
                 }
+                chainPermissions("Вычисление разрешений для пользователя")
                 chain {
                     title = "Логика сохранения"
                     repoRead("Чтение заявки из БД")
+                    accessValidation("Вычисление прав доступа")
                     repoPrepareUpdate("Подготовка объекта для обновления")
                     repoUpdate("Обновление заявки в БД")
                 }
+                frontPermissions("Вычисление пользовательских разрешений для фронтенда")
                 prepareResult("Подготовка ответа")
             }
             operation("Удалить заявку", DemandCommand.DELETE) {
@@ -155,12 +170,15 @@ class DemandProcessor(private val settings: DemandSettings = DemandSettings()) {
 
                     finishDemandValidation("Завершение проверок")
                 }
+                chainPermissions("Вычисление разрешений для пользователя")
                 chain {
                     title = "Логика удаления"
                     repoRead("Чтение заявки из БД")
+                    accessValidation("Вычисление прав доступа")
                     repoPrepareDelete("Подготовка объекта для удаления")
                     repoDelete("Удаление заявки из БД")
                 }
+                frontPermissions("Вычисление пользовательских разрешений для фронтенда")
                 prepareResult("Подготовка ответа")
             }
             operation("Поиск заявок", DemandCommand.SEARCH) {
@@ -179,8 +197,13 @@ class DemandProcessor(private val settings: DemandSettings = DemandSettings()) {
                 }
                 chain {
                     title = "Логика поиска в БД"
+
+                    chainPermissions("Вычисление разрешений для пользователя")
+                    searchTypes("Подготовка поискового запроса")
+
                     repoSearch("Поиск заявок в БД")
                 }
+                frontPermissions("Вычисление пользовательских разрешений для фронтенда")
                 prepareResult("Подготовка ответа")
             }
         }.build()

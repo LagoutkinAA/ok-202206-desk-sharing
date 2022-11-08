@@ -18,6 +18,8 @@ import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngWorkMode
 import ru.otus.otuskotlin.desksharing.common.model.WorkDeskNumber
 import ru.otus.otuskotlin.desksharing.common.now
+import ru.otus.otuskotlin.desksharing.common.permission.DemandPrincipalModel
+import ru.otus.otuskotlin.desksharing.common.permission.DemandUserGroups
 import ru.otus.otuskotlin.desksharing.common.repository.DbDemandsResponse
 import ru.otus.otuskotlin.desksharing.repository.tests.DemandRepositoryMock
 import kotlin.test.Test
@@ -25,6 +27,7 @@ import kotlin.test.assertEquals
 
 class BizRepoSearchTest {
 
+    private val userId = DemandUserId("321")
     private val command = DemandCommand.SEARCH
     private val initDemand = DemandDto(
         date = LocalDate.now(),
@@ -32,7 +35,7 @@ class BizRepoSearchTest {
         employeeId = DskShrngId("123"),
         status = DemandStatus.ACCEPTED,
         number = "1",
-        userId = DemandUserId("123"),
+        userId = userId,
         demandId = DskShrngId("123"),
         workDeskNumber = WorkDeskNumber("1")
     )
@@ -65,6 +68,13 @@ class BizRepoSearchTest {
                 dateFrom = LocalDate.now(),
                 dateTo = LocalDate.now()
             ),
+            principal = DemandPrincipalModel(
+                id = userId,
+                groups = setOf(
+                    DemandUserGroups.USER,
+                    DemandUserGroups.TEST,
+                )
+            )
         )
         processor.exec(ctx)
         assertEquals(DemandState.FINISHING, ctx.state)
