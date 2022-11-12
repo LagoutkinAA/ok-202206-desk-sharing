@@ -8,6 +8,18 @@ management:
         include: info,env
 
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: desk-sharing
+            authorization-grant-type: authorization_code
+            scope: openid
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8081/auth/realms/DemandRealm
+            user-name-attribute: preferred_username
   jackson:
     default-property-inclusion: non_null
 
@@ -18,3 +30,4 @@ springdoc:
     urls:
       - name: v1
         url: specification-demand-v1.yaml
+

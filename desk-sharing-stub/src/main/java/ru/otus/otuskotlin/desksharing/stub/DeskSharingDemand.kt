@@ -1,7 +1,10 @@
 package ru.otus.otuskotlin.desksharing.stub
 
 import kotlinx.datetime.LocalDate
-import ru.otus.otuskotlin.desksharing.common.model.*
+import ru.otus.otuskotlin.desksharing.common.model.DemandDto
+import ru.otus.otuskotlin.desksharing.common.model.DemandStatus
+import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
+import ru.otus.otuskotlin.desksharing.common.model.WorkDeskNumber
 import ru.otus.otuskotlin.desksharing.common.permission.DemandPermissionClient
 
 object DeskSharingDemand {
@@ -14,7 +17,7 @@ object DeskSharingDemand {
             demandId = DskShrngId("2e07327d-ffff-4da1-9c89-eff53a37c000"),
             workDeskNumber = WorkDeskNumber("01a/1"),
             number = "01/001",
-            permissions = mutableSetOf(
+            permissionsClient = mutableSetOf(
                 DemandPermissionClient.READ,
                 DemandPermissionClient.UPDATE,
                 DemandPermissionClient.DELETE

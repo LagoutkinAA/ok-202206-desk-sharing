@@ -83,7 +83,7 @@ private fun DemandDto.toTransportDemand(): DemandResponseObjectDto = DemandRespo
     demandId = demandId.takeIf { it != DskShrngId.NONE }?.asString(),
     userId = userId.takeIf { it != DemandUserId.NONE }?.asString(),
     lock = lock.takeIf { it.isNotBlank() },
-    permissions = permissions.toTransportDemand()
+    permissions = permissionsClient.toTransportDemand()
 )
 
 private fun Set<DemandPermissionClient>.toTransportDemand(): Set<DemandPermissions>? = this

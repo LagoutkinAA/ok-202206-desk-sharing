@@ -38,6 +38,12 @@ dependencies {
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
     testImplementation("com.ninja-squad:springmockk:3.1.1") // mockking beans
     testImplementation("org.assertj:assertj-core:3.23.1")
+
+    //auth
+    testImplementation("org.springframework.security:spring-security-test")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
+
 }
 
 tasks {

@@ -29,3 +29,7 @@ fun LocalDate.Companion.toJavaLocalDate(source: LocalDate): java.time.LocalDate?
 fun LocalDate.Companion.fromJavaLocalDate(source: java.time.LocalDate?): LocalDate {
     return if (source == null) LocalDate.NONE else LocalDate(source.year, source.month, source.dayOfMonth)
 }
+
+fun <C> Any.asList(type: Class<C>): List<C> {
+    return this as List<C>
+}
