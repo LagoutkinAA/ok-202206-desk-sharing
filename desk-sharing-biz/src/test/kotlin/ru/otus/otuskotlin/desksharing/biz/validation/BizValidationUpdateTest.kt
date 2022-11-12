@@ -27,10 +27,6 @@ class BizValidationUpdateTest {
     @Test fun employeeIdIsEmpty() = validationEmployeeIdEmpty(command, processor)
     @Test fun employeeIdBadFormat() = validationEmployeeIdFormat(command, processor)
 
-    @Test fun correctUserId() = validationUserIdCorrect(command, processor)
-    @Test fun userIdIsEmpty() = validationUserIdEmpty(command, processor)
-    @Test fun userIdBadFormat() = validationUserIdFormat(command, processor)
-
     @Test fun correctId() = validationIdCorrect(command, processor)
     @Test fun idIsEmpty() = validationIdEmpty(command, processor)
     @Test fun idBadFormat() = validationIdFormat(command, processor)

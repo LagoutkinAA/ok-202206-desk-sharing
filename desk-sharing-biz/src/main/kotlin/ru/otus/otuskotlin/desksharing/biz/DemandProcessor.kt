@@ -35,8 +35,6 @@ import ru.otus.otuskotlin.desksharing.biz.validation.validateDemandIdNotEmpty
 import ru.otus.otuskotlin.desksharing.biz.validation.validateDemandIdProperFormat
 import ru.otus.otuskotlin.desksharing.biz.validation.validateEmployeeIdNotEmpty
 import ru.otus.otuskotlin.desksharing.biz.validation.validateEmployeeIdProperFormat
-import ru.otus.otuskotlin.desksharing.biz.validation.validateUserIdNotEmpty
-import ru.otus.otuskotlin.desksharing.biz.validation.validateUserIdProperFormat
 import ru.otus.otuskotlin.desksharing.biz.validation.validation
 import ru.otus.otuskotlin.desksharing.common.DemandContext
 import ru.otus.otuskotlin.desksharing.common.model.DemandCommand
@@ -74,8 +72,6 @@ class DemandProcessor(private val settings: DemandSettings = DemandSettings()) {
                     validateBookingDateInRange("Проверка что дата бронирования попадает в диапазон")
                     validateEmployeeIdNotEmpty("Проверка что id сотрудника не пустой")
                     validateEmployeeIdProperFormat("Проверка что id сотрудника соответствует формату")
-                    validateUserIdNotEmpty("Проверка что id пользователя не пустой")
-                    validateUserIdProperFormat("Проверка что id пользователя соответствует формату")
 
                     finishDemandValidation("Завершение проверок")
                 }
@@ -136,8 +132,6 @@ class DemandProcessor(private val settings: DemandSettings = DemandSettings()) {
                     validateBookingDateInRange("Проверка что дата бронирования попадает в диапазон")
                     validateEmployeeIdNotEmpty("Проверка что id сотрудника не пустой")
                     validateEmployeeIdProperFormat("Проверка что id сотрудника соответствует формату")
-                    validateUserIdNotEmpty("Проверка что id пользователя не пустой")
-                    validateUserIdProperFormat("Проверка что id пользователя соответствует формату")
                     validateDemandIdNotEmpty("Проверка что id заявки не пустой")
                     validateDemandIdProperFormat("Проверка что id заявки соответствует формату")
 

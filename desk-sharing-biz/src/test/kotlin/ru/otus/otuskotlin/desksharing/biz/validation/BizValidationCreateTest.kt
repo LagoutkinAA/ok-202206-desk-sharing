@@ -27,9 +27,5 @@ class BizValidationCreateTest {
     @Test fun employeeIdIsEmpty() = validationEmployeeIdEmpty(command, processor)
     @Test fun employeeIdBadFormat() = validationEmployeeIdFormat(command, processor)
 
-    @Test fun correctUserId() = validationUserIdCorrect(command, processor)
-    @Test fun userIdIsEmpty() = validationUserIdEmpty(command, processor)
-    @Test fun userIdBadFormat() = validationUserIdFormat(command, processor)
-
 }
 

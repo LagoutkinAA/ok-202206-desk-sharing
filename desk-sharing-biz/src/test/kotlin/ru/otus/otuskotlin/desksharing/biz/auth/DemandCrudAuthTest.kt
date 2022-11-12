@@ -2,6 +2,9 @@ package ru.otus.otuskotlin.desksharing.biz.auth
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.plus
 import ru.otus.otuskotlin.desksharing.biz.DemandProcessor
 import ru.otus.otuskotlin.desksharing.common.DemandContext
 import ru.otus.otuskotlin.desksharing.common.model.DemandCommand
@@ -11,6 +14,7 @@ import ru.otus.otuskotlin.desksharing.common.model.DemandState
 import ru.otus.otuskotlin.desksharing.common.model.DemandUserId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngId
 import ru.otus.otuskotlin.desksharing.common.model.DskShrngWorkMode
+import ru.otus.otuskotlin.desksharing.common.now
 import ru.otus.otuskotlin.desksharing.common.permission.DemandPermissionClient
 import ru.otus.otuskotlin.desksharing.common.permission.DemandPrincipalModel
 import ru.otus.otuskotlin.desksharing.common.permission.DemandUserGroups
@@ -41,6 +45,7 @@ class DemandCrudAuthTest {
             demandRequest = DeskSharingDemandStub.prepareResult {
                 permissionsClient.clear()
                 demandId = DskShrngId.NONE
+                bookingDate = LocalDate.now().plus(1, DateTimeUnit.DAY)
             },
             command = DemandCommand.CREATE,
             principal = DemandPrincipalModel(
