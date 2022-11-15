@@ -13,13 +13,13 @@ spring:
       client:
         registration:
           keycloak:
-            client-id: desk-sharing
-            authorization-grant-type: authorization_code
-            scope: openid
+            client-id: ${ru.otus.otuskotlin.desksharing.auth.keycloack.clientId}
+            authorization-grant-type: ${ru.otus.otuskotlin.desksharing.auth.keycloack.authorizationGrantType}
+            scope: ${ru.otus.otuskotlin.desksharing.auth.keycloack.scope}
         provider:
           keycloak:
-            issuer-uri: http://localhost:8081/auth/realms/DemandRealm
-            user-name-attribute: preferred_username
+            issuer-uri: ${ru.otus.otuskotlin.desksharing.auth.keycloack.issuerUri}
+            user-name-attribute: ${ru.otus.otuskotlin.desksharing.auth.keycloack.userNameAttribute}
   jackson:
     default-property-inclusion: non_null
 
@@ -31,3 +31,14 @@ springdoc:
       - name: v1
         url: specification-demand-v1.yaml
 
+ru:
+  otus:
+    otuskotlin:
+      desksharing:
+        auth:
+          keycloack:
+            clientId: desk-sharing
+            authorizationGrantType: authorization_code
+            scope: openid
+            issuerUri: http://localhost:8081/auth/realms/DemandRealm
+            userNameAttribute: preferred_username
